@@ -97,6 +97,12 @@
 .g-exit{background:url(icons/1/exit.gif) no-repeat;}
 .g-exit:hover{background:url(icons/2/exit.gif) no-repeat;}
 
+.g-mess{background:url(icons/1/mess.gif) no-repeat;}
+.g-mess:hover{background:url(icons/2/mess.gif) no-repeat;}
+
+.g-undo{background:url(icons/1/undo.gif) no-repeat;}
+.g-undo:hover{background:url(icons/2/undo.gif) no-repeat;}
+
 .g-folder{background:url(icons/1/folder.gif) no-repeat;}
 .g-cal{	background:url(icons/1/cal.gif) no-repeat;}
 .g-desc{background:url(icons/1/desc.gif) no-repeat;}
@@ -109,5 +115,5 @@
 .g-help{background:url(icons/1/help.gif) no-repeat;}
 .g-home{background:url(icons/1/home.gif) no-repeat;}
 .g-redo{background:url(icons/1/redo.gif) no-repeat;}
-.g-undo{background:url(icons/1/undo.gif) no-repeat;}
+
 .g-view_text{background:url(icons/1/view_text.png) no-repeat;}

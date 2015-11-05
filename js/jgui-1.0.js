@@ -25,7 +25,7 @@ var gmessage = {
     search_item2: '\u6761\u4ef6\u0032',//条件2
     search_context: '\u67e5\u627e\u5185\u5bb9',//查找内容
     search_allok: '\u5168\u90e8\u6ee1\u8db3\u6761\u4ef6',//全部满足条件
-    search_equal:'\u7b49\u4e8e',//等于
+    search_equal: '\u7b49\u4e8e',//等于
     search_gt: '\u5927\u4e8e',//大于
     search_lt: '\u5c0f\u4e8e',//小于
     search_gte: '\u5927\u4e8e\u7b49\u4e8e',//大于等于
@@ -46,9 +46,7 @@ var gmessage = {
     pager_page: '\u6bcf\u9875\u003a',//每页:
     pager_pageitem: '\u6761\u002f\u5171',//条/共
     pager_totalitem: '\u6761'//条
-    
-    
-}
+};
 
 function jguiproto() {
     this.version = '1.0';
@@ -255,8 +253,8 @@ jguiproto.prototype = {
     strtonum: function (str) {
         var cstr = "";
         for (var i = 0; i < str.length; i++) {
-            var k = str.charCodeAt(i)
-            cstr += k + '|'
+            var k = str.charCodeAt(i);
+            cstr += k + '|';
         }
         return cstr.substr(0, cstr.length - 1);
     },
@@ -292,7 +290,7 @@ jguiproto.prototype = {
         if (!options.number) {//0 or null
             return (options.zerotoempty ? '0' : '');
         }
-        if (isNaN(options.number)) return options.number;//no number
+        if (isNaN(options.number)) return options.number;
         var _a = new String(Math.abs(parseFloat(options.number)));
         var _b = _a.split('.');
         var _c = g0(options.bit);
@@ -323,7 +321,7 @@ jguiproto.prototype = {
         var a = ['\u96f6', '\u58f9', '\u8d30', '\u53c1', '\u8086', '\u4f0d', '\u9646', '\u67d2', '\u634c', '\u7396'];
         var b = ['\u5143', '\u62fe', '\u4f70', '\u4edf'];
         var _a = new String(Math.abs(parseFloat(number))).split('.');
-        var _b = _a[0].split('').reverse().join('').match(/(\d{1,4})/g)
+        var _b = _a[0].split('').reverse().join('').match(/(\d{1,4})/g);
         var cqw = ger(_b[0], b, a);
         if (cqw.indexOf('\u5143') != 0) cqw = cqw.replace(/\u96f6/, '\u5143');
         if (_b[1]) {
@@ -536,7 +534,7 @@ Date.prototype.add = function (v, n) {
                         };
                         if (o.collapse1) o.collapse1 = {  
                             click: function (fa) {
-                                var b = this.siblings().eq(0)
+                                var b = this.siblings().eq(0);
                                 if (fa) {
                                     this.hide();
                                     this.parent().parent().outerWidth(36);
@@ -778,7 +776,7 @@ Date.prototype.add = function (v, n) {
                         if (_0) {
                             op.files.push(file);
                             op.files[op.files.length - 1]['divobj'] = _0 = $('<div></div>').addClass('filediv').attr("index", op.files.length - 1).appendTo(op.gdiv);
-                            _0.html('<span></span><span></span><span></span><span></span>')
+                            _0.html('<span></span><span></span><span></span><span></span>');
                             _0.children("span:first").html(file.name);
                             $("<progress></progress>").attr('max', 100).attr("value", 0).appendTo(_0.children("span").eq(1));
                             $("<a></a>").html(gmessage.file_del).gbutton({ icon: 'remove', click: _remove, target: { arr: op.files, obj: _0 } }).appendTo(_0.children("span").eq(2));
@@ -1146,7 +1144,7 @@ Date.prototype.add = function (v, n) {
             odate.data('options', op);
             this.getFormatValue = function () {
                 return op.date.tostr();
-            }
+            };
             this.setValue = function (cda) {
                 op.date = jgui.todate(cda);
                 showdate(op.date, op);
@@ -1340,7 +1338,7 @@ Date.prototype.add = function (v, n) {
                 op.issort = true;
                 var o = a.osort;
                 op.sortField = a.field;
-                var _s = o.children('span')
+                var _s = o.children('span');
                 if (_s.length) { 
                     if (_s.hasClass('g-asc')) { _s.removeClass('g-asc').addClass('g-desc'); op.sortOrder = 'desc'; }
                     else { _s.removeClass('g-desc').addClass('g-asc'); op.sortOrder = 'asc'; }
@@ -1579,7 +1577,7 @@ Date.prototype.add = function (v, n) {
             var ogrid, obody, oparent, op, osum;
             ogrid = $(this).show(); 
             obody = $('<table class="gbody"></table>').append('<tbody></tbody>'); 
-            ogrid.wrap('<div class="grid-wrap"></div>').wrap('<div class="head-wrap"></div>')
+            ogrid.wrap('<div class="grid-wrap"></div>').wrap('<div class="head-wrap"></div>');
             oparent = ogrid.parent().parent();
             op = $.extend({
                 fit: true,
@@ -1680,11 +1678,11 @@ Date.prototype.add = function (v, n) {
                         c4 = "search_c" + jgui.getuid(),
                         i1 = "search_i" + jgui.getuid(),
                         i2 = "search_i" + jgui.getuid();
-                    var bodyHtml = '<table id="' + tid + '" style="margin:10px;"><tr style="text-align:center" ><td></td><td>'+gmessage.search_item+'</td><td></td><td>'+gmessage.search_context+'</td></tr>'
-                        + '<tr><td>'+gmessage.search_item1+'<input type="checkbox" id="' + ck1 + '" checked="checked" disabled="disabled"/></td><td><div id="' + c1 + '"></div></td><td><div id="' + c3 + '"></div></td><td><input id="' + i1 + '"/></td></tr>'
+                    var bodyHtml = '<table id="' + tid + '" style="margin:10px;"><tr style="text-align:center" ><td></td><td>' + gmessage.search_item + '</td><td></td><td>' + gmessage.search_context + '</td></tr>'
+                        + '<tr><td>' + gmessage.search_item1 + '<input type="checkbox" id="' + ck1 + '" checked="checked" disabled="disabled"/></td><td><div id="' + c1 + '"></div></td><td><div id="' + c3 + '"></div></td><td><input id="' + i1 + '"/></td></tr>'
                         + '<tr><td>' + gmessage.search_item2 + '<input type="checkbox" id="' + ck2 + '"  /></td><td><div id="' + c2 + '"></div></td><td><div id="' + c4 + '"></div></td><td><input id="' + i2 + '"/></td></tr>'
                         + '<tr><td colspan="4">' + gmessage.search_allok + '<input type="checkbox" id="' + ck3 + '" checked="checked"/></td></tr>'
-                        + '</table>'
+                        + '</table>';
                     op.searchobj = $('<div></div>').html(bodyHtml).appendTo('body').gwindow({ mask: true, isHeightFit: true, width: 480, isOverflow: false, headerIcon: 'find', header: gmessage.search_windowtitle, closed: false });
                     var table = $('#' + tid, op.searchobj);
                     var sear = [{ id: '=', text: gmessage.search_equal }, { id: '>', text: gmessage.search_gt }, { id: '>=', text: gmessage.search_gte }, { id: '<', text: gmessage.search_lt }, { id: '<=', text: gmessage.search_lte }, { id: '<>', text: gmessage.search_noequal }, { id: ' like ', text: gmessage.search_include }, { id: ' not like ', text: gmessage.search_noinclude }];
@@ -1746,15 +1744,15 @@ Date.prototype.add = function (v, n) {
                 if (dou.length > 5) { dou = dou.substr(0, dou.length - 4); sd = sd.substr(0, sd.length - 1); } else return;
                 var form = gene_form(action);
                 var inputs = form.childNodes;
-                var u = op.url.split('/');
-                var dd = u[u.length - 1].split('?')[0];
+                var u =(op.url? op.url.split('/'):null);
+                var dd =(u? u[u.length - 1].split('?')[0]:"");
                 if (f) {
-                    var _0 = '\u6807\u9898\uff1a' + dou.replace(/<\/th>/g, ",").replace(/<th>/g, '') + '<br/>' + '\u5b57\u6bb5\uff1a' + sd + '<br/>' + '\u6392\u5e8f\u5b57\u6bb5\uff1a' + op.sortField + '<br/>' + '\u6392\u5e8f\u65b9\u5f0f\u003a' + op.sortOrder + '<br/>\u67e5\u8be2\u6761\u4ef6\uff1a' + op.para.w + '<br/>\u6570\u636e\u6e90\uff1a' + op.url
+                    var _0 = '\u6807\u9898\uff1a' + dou.replace(/<\/th>/g, ",").replace(/<th>/g, '') + '<br/>' + '\u5b57\u6bb5\uff1a' + sd + '<br/>' + '\u6392\u5e8f\u5b57\u6bb5\uff1a' + op.sortField + '<br/>' + '\u6392\u5e8f\u65b9\u5f0f\u003a' + op.sortOrder + '<br/>\u67e5\u8be2\u6761\u4ef6\uff1a' + op.para.w + '<br/>\u6570\u636e\u6e90\uff1a' + op.url;
                     f.call(this, _0);
                 }
                 $("input[name='id']", form).val(dd);
                 $("input[name='sf']", form).val(encodeURIComponent(op.sortField));
-                $("input[name='so']", form).val(encodeURIComponent(op.sortOrder))
+                $("input[name='so']", form).val(encodeURIComponent(op.sortOrder));
                 $("input[name='w']", form).val(encodeURIComponent(op.para.w));
                 $("input[name='dou']", form).val(encodeURIComponent(dou));
                 $("input[name='sd']", form).val(encodeURIComponent(sd));
@@ -1826,7 +1824,7 @@ Date.prototype.add = function (v, n) {
                 opanel.css('height', '');
                 return false;
             };
-            opanel.wrapInner('<div class="gpanel-content"></div>').prepend('<div class="gtitlebar"></div>')
+            opanel.wrapInner('<div class="gpanel-content"></div>').prepend('<div class="gtitlebar"></div>');
             var op = $.extend({
                 header: '',
                 headerIcon: '',
@@ -1905,14 +1903,14 @@ Date.prototype.add = function (v, n) {
             };
             this.add = function (options) {
                 var o = $.extend({
-                    header: tabs_title,
+                    header:gmessage.tabs_title,
                     src: null,
                     contend: '',
                     close: true
                 }, options);
                 var a = $('<li>' + o.header + '</li>').data('header', o.header).addClass('gtab-nav');
                 if (o.close)
-                    a.append('<span></span>')
+                    a.append('<span></span>');
                 a.appendTo(op.li);
                 if (o.src) {
                     var iframe = $("<iframe src='" + o.src + "'></iframe>").outerHeight(op.div.height() + 4, true);
@@ -1971,7 +1969,7 @@ Date.prototype.add = function (v, n) {
             if (op.collapse) {
                 io++;
                 op.collapseobj = $('<span  class="gtitlebar-img"></span>').addClass('g-expand').on('click', function () {
-                    document.onselectstart = function () { return false; } //兼容IE ,否则IE下不会立即显示改变的class
+                    document.onselectstart = function () { return false; }; //兼容IE ,否则IE下不会立即显示改变的class
                     var $v = $(this);
                     if ($v.hasClass('g-expand')) {
                         $v.removeClass('g-expand').addClass('g-collapse');
@@ -1981,14 +1979,14 @@ Date.prototype.add = function (v, n) {
                         if (op.gcontent) op.gcontent.show();
                     }
                     if (op.collapse.click) op.collapse.click.call(op.collapse.obj);
-                    document.onselectstart = function () { return true; }
+                    document.onselectstart = function () { return true; };
                     return false;
                 }).appendTo(head.eq(1));
             }
             if (op.collapse1) { 
                 io++;
                 op.collapseobj1 = $('<span  class="gtitlebar-img"></span>').addClass('g-collapse1').on('click', function () {
-                    document.onselectstart = function () { return false; } //兼容IE ,否则IE下不会立即显示改变的class
+                    document.onselectstart = function () { return false; }; //兼容IE ,否则IE下不会立即显示改变的class
                     var fa, $v = $(this);
                     if ($v.hasClass('g-collapse1')) {
                         $v.removeClass('g-collapse1').addClass('g-expand1');
@@ -1998,7 +1996,7 @@ Date.prototype.add = function (v, n) {
                         fa = false;
                     }
                     if (op.collapse1.click) op.collapse1.click.call(op.collapse1.obj, fa);  //fa true->收  false->开
-                    document.onselectstart = function () { return true; }
+                    document.onselectstart = function () { return true; };
                     return false;
                 }).appendTo(head.eq(1));
 
@@ -2006,7 +2004,7 @@ Date.prototype.add = function (v, n) {
             if (op.max) {
                 io++;
                 op.maxobj = $('<span class="gtitlebar-img"></span>').addClass(op.fit ? "g-restore" : 'g-max').on('click', function () {
-                    document.onselectstart = function () { return false; }
+                    document.onselectstart = function () { return false; };
                     var $v = $(this);
                     if ($v.hasClass('g-max')) {
                         $v.removeClass('g-max').addClass('g-restore');
@@ -2018,7 +2016,7 @@ Date.prototype.add = function (v, n) {
                     if (op.collapseobj && op.collapseobj.hasClass('g-collapse'))
                         op.collapseobj.removeClass('g-collapse').addClass('g-expand').show();
                     if (op.max.click) op.max.click.call(this, op.fit);
-                    document.onselectstart = function () { return true; }
+                    document.onselectstart = function () { return true; };
                     return false;
                 }).appendTo(head.eq(1));
             }
@@ -2189,7 +2187,7 @@ Date.prototype.add = function (v, n) {
             this.setData = function (data) {if (data && $.isArray(data)) setdata(otree, op, data); };
             this.load = function (url) { if (url) this.set('url', url); getdata(otree, op); };
             this.geach = function (e) {
-                eachnode(otree.children('ul:first'));
+                eachnode(otree);
                 function eachnode(node) {
                     node.children('li').each(function (i, v) {
                         if (each($(v), jgui.parseJSON($(v).children('div:first').data('options')))) {
@@ -2221,7 +2219,7 @@ Date.prototype.add = function (v, n) {
             this.get = function (name) { return op[name] };
             this.getCheckSelect = function (bz) {
                 var r = [];
-                eachnode(otree.children('ul:first'));
+                eachnode(otree);
                 function eachnode(node) {
                     node.children('li').each(function (i, v) {
                         var k = jgui.parseJSON($(v).children('div:first').data('options'));
@@ -2450,7 +2448,7 @@ Date.prototype.add = function (v, n) {
                 return false;
             });
         });
-    }
+    };
     //resize
     $.fn.gresize = function (options) {
         return this.each(function () {
@@ -2496,7 +2494,7 @@ Date.prototype.add = function (v, n) {
                            });
             });
         });
-    }
+    };
     //提示
     $.fn.gtip = function (options) {
         return this.each(function () {
@@ -2538,7 +2536,7 @@ Date.prototype.add = function (v, n) {
             .off('mouseout').on('mouseout', function (e) { jq.data('over', false); otip.hide(); });
 
         });
-    }
+    };
     //refresh
     $.fn.grefresh = function (options) {
         return this.each(function () {
@@ -2561,7 +2559,7 @@ Date.prototype.add = function (v, n) {
                 var w = o.outerWidth(), h = o.outerHeight(), x = o.offset().left, y = o.offset().top, _w = $(this).outerWidth(), _h = $(this).outerHeight();
                 op.back.css({ top: y, left: x, width: w, height: h }).show();
                 $(this).css({ left: Math.round((w - _w) / 2 + x), top: Math.round((h - _h) / 2 + y) }).show();
-            }
+            };
             this.hide = function () {
                 if (!op.obj) return;
                 $(this).hide();
