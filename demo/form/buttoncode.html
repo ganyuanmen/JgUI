@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title></title>
+    <script src="../../js/jquery-2.1.3.min.js"></script>
+    <script src="../../js/jgui-1.0.min.js"></script>
+    <link href="../../css/jgui.css" rel="stylesheet" />
+    <link href="../../css/icon.css" rel="stylesheet" />
+       <script src="../../js/demo.js"></script>
+</head>
+<body style="padding:2px;">
+    <div style="margin:100px;">
+        <fieldset>
+            <legend>带小图标</legend>
+        <div class="gtoolbar" >
+            <a class="gbutton" data-options="{click:add,icon:'add'}" >增加</a>
+            <a class="gbutton" data-options="{click:add2}">增加</a>
+        </div>
+            <br />
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>带参数</legend>
+            没定以下button 参数<input id="t1"  value="传进的参数" />  <a class="gbutton" data-options="{click:set,icon:'set'}" >设定</a>
+            <div class="gtoolbar">
+                <a id="b1" class="gbutton" data-options="{click:add1,icon:'add',para:'传进的参数'}">增加</a>
+            </div>
+            <br />
+        </fieldset>
+
+    </div>
+       
+<script>
+    var ihtml = document.body.innerHTML;
+    function add() {
+        jgui.alert(" 带小图标的按钮控件！");
+    }
+    function add2() {
+        jgui.alert(" 不带图标的按钮控件！");
+    }
+    function add1(e) {
+
+        jgui.alert(" 参数：" + e);
+    }
+    function set() {
+        jgui.get("b1").set('para', jgui.get('t1').value);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,807 @@
+﻿body{background:#FFF;color:#3D464B;font:13px/1.7 Tahoma verdana,'\5b8b\4f53',arial,georgia,helvetica,sans-serif; position:relative; }
+html,body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,pre,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}
+ul,ol{list-style:none;}
+a, a:link, a:visited { text-decoration:none;}
+a:hover {text-decoration: none;}
+
+  pre {
+       background-color:#EFEFEF;
+       border:1px solid gray;
+     }
+
+.view {
+    font-size:1em;
+  
+}
+input::-ms-clear { display: none; }
+.table {
+    display:table;
+    table-layout:fixed;
+    background-color:#fff;
+
+}
+.tr {
+    display:table-row;
+}
+.td {
+    display:table-cell;
+    vertical-align:middle;
+    
+}
+.gfile {
+    position: relative;
+    /*display: inline-block;*/
+    overflow:hidden;
+}
+.gfile input {
+    position: absolute;
+    /*font-size: 90px;*/
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.filediv { 
+    position:relative;
+    border-bottom:1px solid gray;
+    white-space:nowrap;
+    padding-left:3px;
+
+}
+    .filediv > span {
+      display:inline-block;
+        padding-right:20px;
+     
+        height:26px;
+        line-height:26px;
+        vertical-align: bottom;
+        
+    
+    }
+
+/*自动拆行*/
+.g_nei {
+    word-break: break-all;
+    word-wrap:break-word;
+}
+.pinput {
+    
+  border: 1px solid #314d89;
+  outline: none;
+  padding: 4px ;
+  border-radius: 4px;
+  box-shadow: 0 -1px 0 #e0e0e0 inset, 0 1px 2px rgba(0, 0, 0, 0.23) inset;
+
+}
+/*gresize------------------------------------------------------------------------------------------*/
+.gresize {
+    background: url(../css/icons/1/resize.gif) no-repeat bottom right;
+    position:absolute;
+}
+.gmenu {
+    height:22px;
+    line-height:22px;
+}
+/*gtoolbar---------------------------------------------------------------------------------------------------------*/
+.gtoolbar {
+    background:linear-gradient(to bottom,#EFFDFF,#9DB8D4); 
+    border:#d2d2d2 0px solid;
+    position:relative;
+    padding:2px 1px;
+}
+
+.gbutton {
+	font-size: 12px; 
+	padding: 4px; 
+	border-radius: 3px; 
+    border: 1px solid #ABBAD0;
+	background-color: #DDEAF7;
+}
+.gbutton:hover {
+	border: 1px solid #4690ad;
+	background-color: #aae5f7;
+}
+
+/*gpanel------------------------------------------------------------------------------------------------------------*/
+.gpanel {border:1px solid #8BA0BC;
+         background-color:#fff;
+         position:relative;
+         margin:2px;
+         display:none;
+         min-height:24px;  
+}
+.gpanel-content {
+    /*overflow: auto;*/
+    padding: 2px;
+    
+}
+/*gtree------------------------------------------------------------------------------------------------------------------*/
+
+.gtree, .gtree ul{position:relative;display:block; height: auto; margin:0;padding:0;    white-space:nowrap;  word-break:keep-all;}
+.gtree li {
+     font-size:9pt;
+    font-family:Tahoma, Verdana, 宋体;
+    line-height:18px;    
+    padding:0px;
+    width:100%;
+    position:relative;
+    white-space:nowrap;
+    word-break:keep-all;
+    
+}
+
+.gtree li>div {
+   margin-top:0px;
+   margin-right:2px;
+   cursor:default;
+   white-space:nowrap;   
+   word-break:keep-all;   
+   height:22px;
+   line-height:18px;
+}
+
+ /*鼠标移上有反应区域*/
+.gtree-node {
+    border:1px solid rgba(255, 255, 255, 0);
+   vertical-align:top;
+   padding-right:3px;
+   height:20px;
+   cursor:pointer;
+   display:inline-block;
+   margin-left:0px;
+}
+    .gtree-node > input {
+        vertical-align:middle;
+    }
+    .gtree-node:hover {
+        border:1px solid blue;
+          /*border:1px solid rgb(255, 216, 0);
+                background-color:rgba(128, 128, 128,0.15);*/
+    }
+
+/*线空域*/
+.gtree-line
+{
+    display:inline-block;
+    width:18px;
+    height:23px;
+  
+}
+/*线图片空域*/
+.gtree-line-icon
+{
+    display:inline-block;
+    width:18px;
+    height:22px;    
+    background:no-repeat 2px 0px;
+    outline:none;
+    
+}
+/*树叶图片空域*/
+.gtree-icon, .gtree-iconfolder, .gtree-leaf, .gtree-coex, .gtree-coexf, .gtree-coexl, .gtree-coexn {
+    display: inline-block;
+    width: 18px;
+    height: 20px;
+    user-select: none;
+  }
+.gtree-icon, .gtree-iconfolder {
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+}
+.gtree-icontwo, .gtree-icondown, .gtree-iconup {
+    background-repeat: no-repeat;
+    background-position: 4px 50%;
+
+}
+/*直线*/
+.gtree-tl { 
+        background:transparent url(tree/tl.gif) repeat-y 50% 50%; 
+}
+/*上下都有的线*/
+.gtree-tln
+{
+     background:transparent url(tree/tl-n.gif) no-repeat 1px -4px; 
+}
+/*最后一根线*/
+.gtree-tll
+{
+    background:transparent url(tree/ll.gif) no-repeat 2px -4px; 
+}
+ /*展开的node*//*收缩的图片*/
+.gtree-expand .gtree-iconfolder
+{
+     background:transparent url(tree/fo.gif) no-repeat 50% 50%;
+     
+}
+.gtree-collapse .gtree-iconfolder
+{
+     background:transparent url(tree/f.gif) no-repeat 50% 50%;
+}
+
+/*树叶*/
+.gtree-leaf
+{
+     background:transparent url(tree/leaf.gif) no-repeat 50% 50%; 
+}
+
+/*前置图标+-*/ 
+.gtree-expand .gtree-coex
+{
+  background:transparent url(tree/ex.gif) no-repeat 50% 50%; 
+}
+.gtree-collapse .gtree-coex
+{
+     background:transparent url(tree/co.gif) no-repeat 50% 50%; 
+}
+
+/*first前置图标+-*/ 
+.gtree-expand .gtree-coexf
+{
+     background:transparent url(tree/fex-n.gif) no-repeat 50% 50%; 
+}
+.gtree-collapse .gtree-coexf
+{
+     background:transparent url(tree/fco-n.gif) no-repeat 50% 50%; 
+}
+
+/*last前置图标+-*/ 
+.gtree-expand .gtree-coexl
+{
+    background:transparent url(tree/lex-n.gif) no-repeat 2px 50%;
+}
+.gtree-collapse .gtree-coexl
+{
+       background:transparent url(tree/lco-n.gif) no-repeat 50% 50%;
+}
+
+
+/*三面带线前置图标+-*/ 
+.gtree-expand .gtree-coexn
+{
+    background:transparent url(tree/ex-n.gif) no-repeat 2px 50%;
+}
+
+.gtree-collapse .gtree-coexn
+{
+   background:transparent url(tree/co-n.gif) no-repeat 50% 50%; 
+}
+
+
+
+/*treenode div*/
+
+/*tree文字*/
+.gtree-nodetext {
+    display:inline-block;
+    padding:0 3px;
+    white-space:nowrap;
+    height:20px;
+    line-height:20px;
+    vertical-align:top;
+}
+
+.gtree-collapse>ul
+{
+    display:none;
+}
+
+.gtree-expand>ul
+{
+    display:block;
+}
+
+.gtree-on {
+    background-color:#08c;
+
+    color:#fff;
+	border-radius: 3px;
+}
+
+/*gwindow--------------------------------------------------------------------------------------------------------------------*/
+.gwindow {border:1px solid #8BA0BC;
+         position:absolute;
+         margin:2px;
+         background-color:#fff;
+         display:none;
+}
+/*gtabs---------------------------------------------------------------------------------------------------------------------*/
+.gtabs { /*margin:4px;*/ 
+         /*background-color:blue;*/
+         position:relative;
+         width:100%;
+         box-sizing:border-box; 
+}
+/*黄向菜单框架(tab)*/
+.gtabs ul   
+{
+    /*background:linear-gradient(to bottom,#FFF,#9DB8D4);*/ 
+    height:26px;
+    position:relative;
+    border-bottom:1px solid #9DB8D4;
+}
+/*每个tab*/
+.gtabs ul li
+{
+    float: left;
+    line-height: 24px;
+    height:24px;
+    position:relative;
+    margin-right:2px;
+    border-radius: 10px 10px 0px 0px;
+    padding: 2px 15px 0 15px;
+}
+/*内容区 注意box-sizing:border-box;  */
+.gtabs  > div:last-child {
+    padding:1px 1px 0px 1px;
+    box-sizing:border-box;  
+    border-left:1px solid #9DB8D4;
+    
+    border-right:1px solid #9DB8D4;
+    border-bottom:1px solid #9DB8D4;
+    position:relative;
+    background-color:#FFF;
+    
+    }
+
+/*tab样子*/
+.gtabs .gtab-nav{
+     background-color:#9DB8D4;
+     cursor:pointer;
+}
+/*选中样式*/
+.gtabs .gtab-nav-action{
+    border-top:1px solid #9DB8D4;
+    border-left:1px solid #9DB8D4;
+    border-right:1px solid #9DB8D4;
+    background:linear-gradient(to top,#FFF,#9DB8D4); 
+    font-weight:bold;
+}
+
+    .gtabs ul li span {
+       background:url("icons/1/close1.gif") no-repeat;
+        cursor:pointer;
+        margin-left:10px;
+        padding:0px 8px;
+    }
+
+    .gtabs>ul>li>span:hover {
+        background:url("icons/2/close1.gif") no-repeat;
+    }
+    .gtabs > div:last-child iframe {
+        width:100%;
+        border:1px solid red;
+        margin:0;
+        border:0;
+        padding:0;
+         box-sizing:border-box; 
+    }
+/*ggrid---------------------------------------------------------------------------------------------*/
+.ggrid{
+       width: 0px;
+       height: 1px;
+       position: relative;
+       text-align: left;
+       border-spacing: 0;
+       padding: 0;
+       border: 0;
+       z-index: 56;
+}
+.gbody {
+       width: 0px;
+       height: 1px;
+       position: relative;
+       text-align: left;
+       table-layout: fixed;
+       display: table;
+       border-spacing: 0;
+       padding: 0;
+       border: 0;
+       z-index: 56;
+}
+.ggrid-sum{
+       width: 0px;
+       height: 1px;
+       position: relative;
+       text-align: left;
+       border-spacing: 0;
+       padding: 0;
+       border: 0;
+       z-index: 56;
+       display: table; table-layout: fixed;
+}
+
+.body-wrap {
+    margin:0; 
+    position:relative;
+    overflow:auto;
+}
+.grid-wrap {
+  border:0px solid #d2d2d2;
+  position:relative;
+}
+.grid-cell-select {
+    background-color:white;
+}
+.head-wrap {
+    margin:0; 
+    position:relative;
+    overflow:hidden;
+}
+
+/*.ggrid-sum {
+   height:24px;
+   background: #E7EBEF;
+}*/
+
+.ggrid-sum td {
+    padding: 0px 4px 0px 0px;
+    border:0;
+    border-right:#d2d2d2 1px solid;
+    
+    border-top:#d2d2d2 1px solid;
+    cursor:default; 
+    overflow:hidden;
+    _text-overflow:ellipsis; 
+    text-overflow:ellipsis; 
+     background: #E7EBEF;
+    margin:0;
+    height:18px;
+    line-height:18px;
+    text-align:right;
+
+    
+}
+/*标题*/    
+.ggrid td {
+    background: #E7EBEF;
+    padding: 0px 4px 0px 0px;
+    border:0;
+    border-right:#d2d2d2 1px solid;
+    border-bottom:#d2d2d2 1px solid;
+    cursor:default; 
+    overflow:hidden;
+    _text-overflow:ellipsis; 
+    text-overflow:ellipsis; 
+    text-align:center;
+    }
+.gbody td {
+    /*background:#fff;*/
+    padding: 2px;
+    border:0;
+    border-right:#d2d2d2 1px solid;
+    border-bottom:#d2d2d2 1px solid;
+    cursor:default; 
+    overflow:hidden;
+    _text-overflow:ellipsis; 
+    text-overflow:ellipsis; 
+    }
+
+.ggrid  td>div>div:first-child ,.gbody  td>div {
+        line-height: 22px;
+        overflow: hidden;
+        font-size: 9pt;
+        /*background-color:red;*/
+        font-family: Tahoma, Verdana, 宋体;
+        padding: 0px 4px 0px 4px;
+        width: calc(100% - 8px);
+        position: relative;
+        white-space: nowrap;
+        word-break: break-all;
+        text-overflow: ellipsis;
+
+    }
+
+.ggrid td>div>div:last-child {
+      position: absolute;
+        overflow: hidden;
+        background: white;
+        cursor: e-resize;
+        opacity: .0; -moz-opacity: .0; filter: alpha(opacity=0);
+        z-index: 9100;
+        top: 0px;
+        right: -3px;
+        height: 100%;
+        width: 5px;
+    }
+  .ggrid .order {
+        margin-left: 4px;
+        margin-right: 2px;
+    }
+
+  /*移动到 */
+.row-move {
+    background-color:#ECEDEF;
+}
+/*选择行*/
+.row-select {
+    background-color:#A9C95D;
+}
+  /*页码*/
+.gpager {
+   background:linear-gradient(to bottom,#EFFDFF,#9DB8D4); 
+   border-top:1px solid  #d2d2d2;
+   position:relative;
+   /*padding-left:10px;
+   padding-right:10px;*/
+}
+.gpager-img:hover {
+    border:1px solid #d2d2d2;
+    border-radius:5px;
+    background-color:rgba(255, 0, 0, 0.3);
+}
+.gpager-img {
+    width:20px;
+    height:24px;
+    border:1px dashed rgba(255, 255, 255, 0);
+}
+
+/*标题背景*/
+    .thdou {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 8000px;
+        height: 100%;
+        z-index: 50;
+        margin-left: -2px;
+        margin-top: -1px;
+        _top: auto;
+        _bottom: -1px;
+         background: #E7EBEF;
+            border:0;
+    border-right:#d2d2d2 1px solid;
+    border-bottom:#d2d2d2 1px solid;
+    cursor:default; 
+    overflow:hidden;
+    }
+
+
+
+
+/*glayout----------------------------------------------------------------------------------------------*/
+.glayout {
+         position:relative;
+          min-height:30px;
+          box-sizing:border-box;
+
+}
+.gtcell {
+    display:table-cell; 
+    vertical-align:top;
+    box-sizing:border-box;
+}
+
+/*---------------------------------------------------------------------------------------------------*/
+       .gtip {
+            position: absolute;
+            top: 200px;
+            left: 300px;
+        }
+        .gtip1 {
+            top: 0px;
+            border-color:transparent transparent #F8D19F transparent;
+        }
+
+        .gtip2 {
+            top: 1px;
+            border-color:transparent transparent #FDFBB8 transparent;
+        }
+
+        .gtiptext {
+              word-break:keep-all;
+                word-wrap:normal;
+            border: 1px solid #F8D19F;
+            position: absolute;
+            top: 24px;
+            padding: 4px 15px;
+            border-radius:8px;
+            color:#D07807;
+            /*box-shadow: 0px 0px 40px #FF7700;*/
+            background-color:#FDFBB8;
+            z-index: 9900;
+        }
+        .gtip1, .gtip2 {
+            border-style:  solid ;
+            width: 0;
+            height: 0;
+            line-height: 0;
+            font-size: 0;
+            overflow: hidden;
+            left: 5px;
+            border-width:12px;
+            position: absolute;
+            z-index: 9901;
+        }
+/*gtitlebar--------------------------------------------------------------------------------------*/
+.gtitlebar{
+       height:24px;
+        line-height:24px;
+        background:linear-gradient(to left,#EFFDFF,#9DB8D4); 
+        position:relative;
+}
+
+.gtitlebar-img{
+    cursor: pointer;
+    padding: 0px 8px 2px 8px;
+    margin:0px 2px 0px 2px;
+}
+.gtext {
+    border:1px solid #d2d2d2;
+    border-radius:3px;
+    height:20px;
+}
+
+/*-----------------------------------------------------------------------------------------------------*/
+.gradio {
+ position:relative;
+ border:1px solid #d2d2d2;
+ padding:2px;
+ font:12px Tahoma verdana,'\5b8b\4f53';
+ overflow:hidden;
+ height:18px;
+ line-height:20px;
+ vertical-align:middle;
+}
+    .gradio > input {
+        margin-right:10px;
+    }
+    .gradio > label {
+        margin-right:3px;
+    }
+
+.gcombo {
+ position:relative;
+ border:1px solid #d2d2d2;
+ padding:0;
+ 
+ font:12px Tahoma verdana,'\5b8b\4f53';
+ height:20px;
+ 
+}
+/*poupu弹出框与combo是同级*/
+    .gcombo table, .gcombo-poupu table {
+        margin:0;
+        padding:0;
+        
+        border-collapse:collapse;  
+        border-spacing:0;  
+        table-layout:fixed;
+    }
+    .gcombo td {
+        padding:0; 
+    }
+.gcombo-height {
+    height:18px;
+    min-height:18px;
+}
+.gcombo-img {
+    background:url(icons/1/combo.gif) no-repeat center center #D5E8FF;
+    width:18px;
+}
+.gcombo-img:hover {
+    background:url(icons/2/combo.gif) no-repeat center center #FFBB00;
+}
+
+
+.gcombo-text {
+    border:0;
+    padding:1px 2px;
+    
+}
+.gcombo-poupu {
+    position: absolute;
+    display: none;
+    overflow:auto;
+    background-color:#FFF;
+    border:1px solid  #d2d2d2;
+    padding:2px;
+    z-index:19600;
+}
+/*下拉选择行*/
+.gcombo-poupu-combo{
+    height:22px;
+    line-height:22px;
+    overflow:hidden;
+    white-space:nowrap;
+
+}
+.gcombo-poupu-move {
+    background-color:#D5E8FF;
+}
+/*-------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------*/
+
+/*.gdate {
+ position:relative;
+ border:1px solid #d2d2d2;
+ padding:0;
+ font:12px Tahoma verdana,'\5b8b\4f53';
+ display:table;
+ 
+}*/
+.gdate-cell {
+    display:table-cell;
+    vertical-align:middle;
+        padding:1px;
+        height:20px;
+        
+        line-height:20px;
+        text-align:center;
+}
+.gdate-poupu {
+    display:table;
+        width:2px;
+        border-top:1px solid  #d2d2d2;
+}
+   
+.gdate-cel {
+    border:1px solid #fff;
+}
+.gdate-cursor {
+    background-color:#D5E8FF;
+    border:1px solid red;
+    cursor:pointer;
+}
+.gdate-button {
+      border-top:1px solid  #d2d2d2;
+      height:26px;
+      line-height:26px;
+      padding-left:48px;
+}
+.gdate-img {
+    height:20px;
+    /*border:1px solid red;*/
+    display:table-cell;
+    cursor:pointer;
+}
+
+
+/*-------------------------------------------------------------------*/
+.grefresh {
+    width:200px;
+    height:50px;
+    overflow:hidden;
+    position:absolute;
+    /*border:1px solid blue;*/
+  display:none;
+   box-shadow:0 0 10px 5px blue;
+  background-color:#fff;
+    z-index:9999;
+}
+.grefresh-img {
+    	background:url(icons/1/loading.gif) no-repeat center center;
+        height:50px;
+        width:45px;
+        margin-left:10px;
+        margin-right:20px;
+        float:left;
+   
+}
+.grefresh-text {
+    font-size:14px;
+    height:50px;
+    line-height:50px;
+    float:left;
+}
+.grefresh-back {
+    background: rgba(0, 0, 0, 0.3);
+    display:none;
+    position:absolute;
+      z-index:9998;
+}
+.gform {
+    position:relative;   
+
+}
+
+progress {
+    background: #fff;
+    border-radius: 10px; border: 5px double #aaa;
+    display: block;
+    margin-top:3px;
+    width:200px;
+    height:16px;
+    box-sizing:border-box;
+}                      

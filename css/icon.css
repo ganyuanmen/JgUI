@@ -1,0 +1,119 @@
+﻿.g-add{background:url(icons/1/add.gif) no-repeat;}
+.g-add:hover{background:url(icons/2/add.gif) no-repeat;}
+
+.g-close{background:url(icons/1/close.gif) no-repeat;}
+.g-close:hover{background:url(icons/2/close.gif) no-repeat;}
+
+.g-close1{background:url(icons/1/close1.gif) no-repeat;}
+.g-close1:hover{background:url(icons/2/close1.gif) no-repeat;}
+
+.g-collapse{background:url(icons/1/collapse.gif) no-repeat;}
+.g-collapse:hover{background:url(icons/2/collapse.gif) no-repeat;}
+
+.g-expand{background:url(icons/1/expand.gif) no-repeat;}
+.g-expand:hover{background:url(icons/2/expand.gif) no-repeat;}
+
+.g-excel{background:url(icons/1/excel.gif) no-repeat;}
+.g-excel:hover{background:url(icons/2/excel.gif) no-repeat;}
+
+.g-cut{background:url(icons/1/cut.png) no-repeat;}
+.g-cut:hover{background:url(icons/2/cut.gif) no-repeat;}
+
+.g-edit{background:url(icons/1/edit.gif) no-repeat;}
+.g-edit:hover{background:url(icons/2/edit.gif) no-repeat;}
+
+.g-copy{background:url(icons/1/copy.gif) no-repeat;}
+.g-copy:hover{background:url(icons/2/copy.gif) no-repeat;}
+
+.g-ok{background:url(icons/1/ok.gif) no-repeat;}
+.g-ok:hover{background:url(icons/2/ok.gif) no-repeat;}
+
+.g-open{background:url(icons/1/open.gif) no-repeat;}
+.g-open:hover{background:url(icons/2/open.gif) no-repeat;}
+
+.g-remove{background:url(icons/1/remove.gif) no-repeat;}
+.g-remove:hover{background:url(icons/2/remove.gif) no-repeat;}
+
+.g-print{background:url(icons/1/print.gif) no-repeat;}
+.g-print:hover{background:url(icons/2/print.gif) no-repeat;}
+
+.g-node{background:url(icons/1/node.png) no-repeat;}
+.g-node:hover{background:url(icons/2/node.png) no-repeat;}
+
+.g-new{background:url(icons/1/new.gif) no-repeat;}
+.g-new:hover{background:url(icons/2/new.gif) no-repeat;}
+
+.g-save{background:url(icons/1/save.gif) no-repeat;}
+.g-save:hover{background:url(icons/2/save.gif) no-repeat;}
+
+.g-max{background:url(icons/1/max.gif) no-repeat;}
+.g-max:hover{background:url(icons/2/max.gif) no-repeat;}
+
+.g-restore{background:url(icons/1/restore.gif) no-repeat;}
+.g-restore:hover{background:url(icons/2/restore.gif) no-repeat;}
+
+.g-date{background:url(icons/1/date.gif) no-repeat center center; }
+.g-date:hover{background:url(icons/2/date.gif) no-repeat center center; }
+
+.g-find2{background:url(icons/1/find.png) no-repeat;}
+.g-find2:hover{background:url(icons/2/find.gif) no-repeat;}
+
+.g-set{background:url(icons/1/set.gif) no-repeat;}
+.g-set:hover{background:url(icons/2/set.gif) no-repeat;}
+
+.g-upload{background:url(icons/1/upload.gif) no-repeat;}
+.g-upload:hover{background:url(icons/2/upload.gif) no-repeat;}
+
+.g-reload{background:url(icons/1/reload.png) no-repeat center center;}
+.g-reload:hover{background:url(icons/2/reload.gif) no-repeat center center;}
+
+.g-first{background:url(icons/1/first.gif) no-repeat center center;}
+.g-first:hover{background:url(icons/2/first.gif) no-repeat center center;}
+
+.g-last{background:url(icons/1/last.gif) no-repeat center center;}
+.g-last:hover{background:url(icons/2/last.gif) no-repeat center center;}
+
+.g-next{background:url(icons/1/next.gif) no-repeat center center;}
+.g-next:hover{background:url(icons/2/next.gif) no-repeat center center;}
+
+.g-prev{background:url(icons/1/prev.gif) no-repeat center center;}
+.g-prev:hover{background:url(icons/2/prev.gif) no-repeat center center;}
+
+.g-cancel{background:url(icons/1/cancel.gif) no-repeat;}
+.g-cancel:hover{background:url(icons/2/cancel.gif) no-repeat;}
+
+.g-expand1{background:url(icons/1/expand1.gif) no-repeat center center;}
+.g-expand1:hover{background:url(icons/2/expand1.gif) no-repeat center center;}
+
+.g-collapse1{background:url(icons/1/collapse1.gif) no-repeat center center;}
+.g-collapse1:hover{background:url(icons/2/collapse1.gif) no-repeat center center;}
+
+.g-left1{background:url(icons/1/left.gif) no-repeat center center;}
+.g-left1:hover{background:url(icons/2/left.gif) no-repeat center center;}
+
+.g-right1{background:url(icons/1/right.gif) no-repeat center center;}
+.g-right1:hover{background:url(icons/2/right.gif) no-repeat center center;}
+
+.g-exit{background:url(icons/1/exit.gif) no-repeat;}
+.g-exit:hover{background:url(icons/2/exit.gif) no-repeat;}
+
+.g-mess{background:url(icons/1/mess.gif) no-repeat;}
+.g-mess:hover{background:url(icons/2/mess.gif) no-repeat;}
+
+.g-undo{background:url(icons/1/undo.gif) no-repeat;}
+.g-undo:hover{background:url(icons/2/undo.gif) no-repeat;}
+
+.g-folder{background:url(icons/1/folder.gif) no-repeat;}
+.g-cal{	background:url(icons/1/cal.gif) no-repeat;}
+.g-desc{background:url(icons/1/desc.gif) no-repeat;}
+.g-asc{	background:url(icons/1/asc.gif) no-repeat;}
+.g-lock{background:url(icons/1/lock.png) no-repeat;}
+.g-unlock{background:url(icons/1/unlock.gif) no-repeat;}
+.g-zoomin{background:url(icons/1/zoomin.gif) no-repeat;}
+.g-zoomout{background:url(icons/1/zoomout.gif) no-repeat;}
+
+.g-help{background:url(icons/1/help.gif) no-repeat;}
+.g-home{background:url(icons/1/home.gif) no-repeat;}
+.g-redo{background:url(icons/1/redo.gif) no-repeat;}
+
+.g-view_text{background:url(icons/1/view_text.png) no-repeat;}

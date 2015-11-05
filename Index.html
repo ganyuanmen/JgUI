@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/jgui-1.0.min.js"></script>
+    <link rel="stylesheet" href="css/jgui.css" />
+    <link rel="stylesheet" href="css/icon.css" />
+</head>
+<body>
+    <div class="glayout" data-options="{fit:true,split:3}" >  
+    <div data-options="{region:'top',height:50,border:[1,1,1,1],hidden:true}" style="font-size:2em; background-image:linear-gradient(to bottom,#EFFDFF,#9DB8D4) " >
+        jGui文档
+    </div>  
+    <div data-options="{region:'bottom',height:22,hidden:true}" style="text-align:center;font-family:arial; " >
+        &copy; 2015 by GanYuanMen [393909065@qq.com]
+    </div>  
+    <div data-options="{region:'left',title:'导航栏',width:200,border:[1,1,1,1],collapse:true}" >
+         <ul id="tree1" class="gtree" data-options='{click:showmenu}'></ul>
+    </div>  
+    <div data-options="{region:'center'}" >
+         <div id="mytab" class="gtabs" data-options="{fit:true}">
+        <div class="aa" data-options="{header:'首页',close:false}" >
+            <div style="width:400px; height:200px; margin-left:auto;margin-right:auto; font-size:20px; color:red;font-weight:bold;">
+            <canvas id="canvas1" width="300" height="200"> 本浏览器不支持HTML5，无法使用JgUI。</canvas>
+                </div>
+       </div>
+</div> 
+    </div>  
+  </div>  
+</body>
+</html>
+<script>
+    var data = [
+{ "id": "191", "pid": "0", "text": "基础函数", "url": "demo/base.html" },
+{ "id": "1", "pid": "0", "text": "控件列表", expand: true },
+{ "id": "7", "pid": "1", "text": "titlebar", "url": "demo/layout/titlebar.html" },
+{ "id": "700", "pid": "7", "text": "titlebar示例", "url": "demo/layout/titlebarcode.html" },
+{ "id": "2", "pid": "1", "text": "panel", "url": "demo/layout/panel.html" },
+{ "id": "201", "pid": "2", "text": "panel示例", "url": "demo/layout/panelcode.html" },
+{ "id": "6", "pid": "1", "text": "layout", "url": "demo/layout/layout.html" },
+{ "id": "600", "pid": "6", "text": "layout示例", "url": "demo/layout/layoutcode.html" },
+{ "id": "9", "pid": "1", "text": "window", "url": "demo/layout/window.html" },
+{ "id": "900", "pid": "9", "text": "window示例", "url": "demo/layout/windowcode.html" },
+{ "id": "10", "pid": "1", "text": "combo", "url": "demo/form/combo.html" },
+{ "id": "100", "pid": "10", "text": "combo示例", "url": "demo/form/combocode.html" },
+{ "id": "11", "pid": "1", "text": "grid", "url": "demo/grid.html" },
+{ "id": "20", "pid": "11", "text": "基本表格", "url": "demo/grid/basicgrid.html" },
+{ "id": "111", "pid": "11", "text": "多表头表格", "url": "demo/grid/multiplegrid.html" },
+{ "id": "21", "pid": "11", "text": "增删改表格", "url": "demo/grid/sumgrid.html" },
+{ "id": "22", "pid": "11", "text": "过滤表格", "url": "demo/grid/filtergrid.html" },
+{ "id": "12", "pid": "1", "text": "tree", "url": "demo/tree.html" },
+{ "id": "120", "pid": "12", "text": "tree示例", "url": "demo/treecode.html" },
+{ "id": "152", "pid": "1", "text": "treeselect", "url": "demo/form/treeselect.html" },
+{ "id": "153", "pid": "152", "text": "treeselect示例", "url": "demo/form/treeselectcode.html" },
+{ "id": "13", "pid": "1", "text": "date", "url": "demo/form/date.html" },
+{ "id": "130", "pid": "13", "text": "date示例", "url": "demo/form/datecode.html" },
+{ "id": "15", "pid": "1", "text": "tabs", "url": "demo/layout/tabs.html" },
+{ "id": "150", "pid": "15", "text": "tabs示例", "url": "demo/layout/tabscode.html" },
+{ "id": "17", "pid": "1", "text": "button", "url": "demo/form/button.html" },
+{ "id": "170", "pid": "17", "text": "button示例", "url": "demo/form/buttoncode.html" },
+{ "id": "18", "pid": "1", "text": "text", "url": "demo/form/text.html" },
+{ "id": "180", "pid": "18", "text": "text示例", "url": "demo/form/textcode.html" },
+{ "id": "23", "pid": "1", "text": "menu", "url": "demo/form/menu.html" },
+{ "id": "230", "pid": "23", "text": "menu示例", "url": "demo/form/menucode.html" },
+{ "id": "203", "pid": "1", "text": "radio", "url": "demo/form/radio.html" },
+{ "id": "204", "pid": "203", "text": "radio示例", "url": "demo/form/radiocode.html" },
+{ "id": "19", "pid": "1", "text": "form", "url": "demo/form/form.html" },
+{ "id": "190", "pid": "19", "text": "form示例", "url": "demo/form/formcode.html" },
+{ "id": "24", "pid": "1", "text": "gfile", "url": "demo/file.html" },
+{ "id": "25", "pid": "24", "text": "本地图片预览及转换", "url": "demo/filecode.html" },
+{ "id": "26", "pid": "24", "text": "多文件上传", "url": "demo/filecode2.html" },
+{ "id": "28", "pid": "24", "text": "大文件分片上传", "url": "demo/filecode3.html" }
+    ];
+
+    var tab=jgui.get('#mytab');
+    function showmenu(e) {
+        if (e.url) {
+            if (tab.isintab(e.text))
+                tab.select(e.text);
+            else
+                tab.add({ header: e.text, src: e.url });
+            }
+    }
+    //如果发布在web服务器上 直接设url即可
+    // <ul class="gtree" data-options='{url: "data/menutree.txt",click:showmenu}'></ul>
+    window.onload = function () {
+        tree1.setData(data);
+        var ctx = document.getElementById("canvas1").getContext("2d");
+        ctx.font = "20px Tahoma";
+        var gradient = ctx.createLinearGradient(0, 0, 201, 0);
+        gradient.addColorStop("0", "green");
+        gradient.addColorStop("1.0", "blue");
+        gradient.addColorStop("0.6", "red");
+        ctx.fillStyle = gradient;
+        ctx.fillText("jGui by GanYuanMen 2015", 1,100);
+    };
+  
+
+</script>

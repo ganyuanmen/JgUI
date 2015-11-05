@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+     <script src="../../js/jquery-2.1.3.min.js"></script>
+    <script src="../../js/jgui-1.0.min.js"></script>
+    <link href="../../css/jgui.css" rel="stylesheet" />
+    <link href="../../css/icon.css" rel="stylesheet" />
+    <script src="../../js/demo.js"></script>
+
+</head>
+
+<body>
+    <br /><br />
+        <a class="gbutton" data-options="{click:add,icon:'add'}" >增加tab</a>
+    <hr />
+   <div id="mytab" class="gtabs" data-options="{fit:false,width:600,height:500}">
+        <div data-options="{header:'首页',close:false}" >
+            <div style="font-size:2em; margin-top:100px; text-align:center; "> jGui by ganyuanmen 2015 </div>
+        </div>
+        <div id="mycontent" data-options="{header:'内容',close:true}" >
+            
+        </div>
+       </div>
+    
+<script>
+    var ihtml = document.body.innerHTML;
+    var index = 0;
+    var tab = jgui.get('mytab');
+    (function (o) {
+        var a = jgui.get('mycontent', tab);
+        for (var i = 0; i < 300; i++) {
+            var _0 = o.createElement("div");
+            var _1 = o.createTextNode("内容");
+            _0.appendChild(_1)
+            a.appendChild(_0);
+        }
+    })(document);
+    function add() {
+        index++;
+        var head = "内容" + index.toString();
+        if (tab.isintab(head))
+            tab.select(head);
+        else
+            tab.add({ header: head, src: 'tabsrc.html?id=' + index });
+
+    }
+</script>
+</body>
+
+</html>

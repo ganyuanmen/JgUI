@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+     <script src="../../js/jquery-2.1.3.min.js"></script>
+    <script src="../../js/jgui-1.0.min.js"></script>
+    <link href="../../css/jgui.css" rel="stylesheet" />
+    <link href="../../css/icon.css" rel="stylesheet" />
+    <script src="../../js/demo.js"></script>
+</head>
+
+<body style="margin:10px;" >
+    <fieldset>
+        <legend>date基本功能</legend>
+
+        <div class="gtoolbar">
+            <a class="gbutton" data-options="{click:get,icon:'add'}">getValue</a>
+            <a class="gbutton" data-options="{click:get1,icon:'edit'}">getFormatValue</a>
+            <a class="gbutton" data-options="{click:get2,icon:'remove'}">setValue</a>
+        </div>
+        <br />
+        <div id="mydate" data-options="{width:98,date:'2013,5,9'}" class="gdate"></div>
+        <br />
+        <br />
+        <div>result:</div>
+        <textarea cols="80"></textarea>
+        </fieldset>
+
+    <br />
+    <fieldset>
+        <legend>日期验证(不能大于当天日期)</legend>
+            <div id="riqi1" class="gdate" data-options="{name:'riqi',valid:validriqi}"></div>
+        <br />
+        <div class="gtoolbar">
+            <a class="gbutton" data-options="{click:cc1,icon:'add'}">验证</a>
+</div>
+            <div>result:</div>
+            <textarea cols="80"></textarea>
+</fieldset>
+<script>
+    var ihtml = document.body.innerHTML;
+    var riqi = jgui.get('mydate');
+    function get() {
+        $('textarea:first').val('getValue:' + riqi.getValue());
+    }
+    function get1() {
+        $('textarea:first').val('getFormatValue:' + riqi.getFormatValue());
+    }
+    function get2() {
+        jgui.prompt("请输入日期 ", function (v) { riqi.setValue(v); }, (new Date()).tostr());
+    }
+    function validriqi(v) {
+        if (v < (new Date())) {
+            this.validMessage = '日期必须大于当天日期';
+            return false;
+        } else
+            return true;
+    }
+
+    function cc1() {
+        $('textarea:last').val(riqi1.getFormatValue() + ":" + (riqi1.valid() ? "验证通过！" : '验证失败！'));
+    }
+</script>
+</body>
+
+</html>

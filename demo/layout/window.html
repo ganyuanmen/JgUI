@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../js/democolor.js"></script>
+    <link href="../../css/demostyle.css" rel="stylesheet" />
+  
+</head>
+<body>
+      <div class="inherrit">继承于：
+         <a href="javascript:exec({ url: 'demo/layout/titlebar.html', text: 'titlebar' })">gtitlebar</a>
+     </div>
+      <div class="inherrit">继承于：
+         <a href="javascript:exec({ url: 'demo/layout/panel.html', text: 'panel' })">gpanel</a>
+     </div>
+
+   <div class="title">
+       <span class="sub1">gwindow</span>
+       <span class="sub2">(窗口管理器)</span>
+   </div>
+
+<pre>
+    &lt;input type="button" onclick="showwindow(1)" value="显示窗口" /&gt;
+    &lt;div id="mywindow" class="gwindow" data-options="{headericon:'add',header:'我的窗口',drageable:true,resizeable:true,shadowable:true,mask:true}" style="width:400px;" &gt;
+        我是窗口
+    &lt;/div&gt;
+        //script:
+         function showwindow(fg) {
+            jgui.get('mywindow').open();
+        }
+    
+</pre>
+    <div class="head" >Properties(属性)：</div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default</th>
+        </tr>
+                <tr>
+            <td>header</td>
+            <td>string</td>
+            <td>窗口标题内容</td>
+            <td></td>
+        </tr>
+
+                <tr>
+            <td>headerIcon</td>
+            <td>string</td>
+            <td>显示在标题栏左边的图标</td>
+            <td></td>
+        </tr>
+
+
+        <tr>
+            <td>mask</td>
+            <td>Boolean</td>
+            <td>是否模态窗口</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>drageable</td>
+            <td>Boolean</td>
+            <td>是否可拖动</td>
+            <td>true</td>
+        </tr>
+
+        <tr>
+            <td>resizeable</td>
+            <td>Boolean</td>
+            <td>是否可改变大小</td>
+            <td>false</td>
+        </tr>
+
+        <tr>
+            <td>collapse</td>
+            <td>Boolean</td>
+            <td>是否显示展开、收起按钮</td>
+            <td>false</td>
+        </tr>
+                <tr>
+            <td>isHeightFit</td>
+            <td>Boolean</td>
+            <td>是否自适应高度</td>
+            <td>false</td>
+        </tr>
+        
+        <tr>
+            <td>isOverflow</td>
+            <td>Boolean</td>
+            <td>超出窗口边界时是否溢出，有date或combo控件时应设为false,允许超出窗口边界</td>
+            <td>true</td>
+        </tr>
+
+        <tr>
+            <td>shadowable</td>
+            <td>Boolean</td>
+            <td>是否显示阴影</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>closed</td>
+            <td>Boolean</td>
+            <td>生成后是否先隐藏</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>close</td>
+            <td>Boolean</td>
+            <td>是否显示关闭按钮</td>
+            <td>true</td>
+        </tr>
+
+
+        <tr>
+            <td>width</td>
+            <td>Number</td>
+            <td>宽度</td>
+            <td>300</td>
+        </tr>
+        <tr>
+            <td>height</td>
+            <td>Number</td>
+            <td>高度,当isHeightFit为true时无效</td>
+            <td>200</td>
+        </tr>
+       <tr>
+            <td>max</td>
+            <td>boolean</td>
+            <td>是否显示最大化按钮</td>
+            <td>false</td>
+        </tr>
+    </table>
+    <div class="head">Methods(方法)：</div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Return</th>
+        </tr>
+        <tr>
+            <td>open</td>
+            <td></td>
+            <td>显示窗口</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>close</td>
+            <td></td>
+            <td>隐藏窗口</td>
+            <td></td>
+        </tr> 
+          <tr>
+            <td>destroy</td>
+            <td></td>
+            <td>删除窗口</td>
+            <td></td>
+        </tr>
+
+    </table>
+
+        Examples(示例)
+       <a  href="javascript:exec({ url: 'demo/layout/windowcode.html', text: 'window示例' })"> gwindow</a>
+
+</body>
+</html>
