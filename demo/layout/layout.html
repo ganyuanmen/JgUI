@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../js/democolor.js" ></script>
+    <link href="../../css/demostyle.css" rel="stylesheet" />
+  
+</head>
+<body>
+ <div class="inherrit">继承于：
+         <a href="javascript:exec({ url: 'demo/layout/titlebar.html', text: 'titlebar' })">gtitlebar</a>
+     </div>
+   <div class="title">
+       <span class="sub1">glayout</span>
+       <span class="sub2">(布局管理器)</span>
+   </div>
+
+  <pre>
+    &lt;div id="layout1" class="glayout" data-options="{fit:true,splitSize:3,width:400,height:300}" &gt;  
+        &lt;div data-options="{region:'top',height:60,title:'1111111',collapse:true,close:true,border:[1,1,1,1]}" &gt;
+            顶部
+        &lt;/div&gt;  
+        &lt;div data-options="{region:'bottom',height:68,border:[1,1,1,1],title:'44444',close:true,collapse:true}" &gt;
+            底部
+        &lt;/div&gt;  
+        &lt;div data-options="{region:'right',icon:'folder',title:'右边',width:100,border:[1,1,1,1],collapse:true}"&gt;
+         中部
+        &lt;/div&gt;  
+        &lt;div data-options="{region:'left',title:'左边',width:200,border:[1,1,1,1],collapse:true,}" &gt;
+            左边
+        &lt;/div&gt;  
+        &lt;div data-options="{region:'center',border:[1,1,1,1]}" &gt;
+            中部
+        &lt;/div&gt;  
+    &lt;/div&gt;
+</pre>
+    <div class="head" >Properties(属性)：</div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default</th>
+        </tr>
+        <tr>
+            <td>fit</td>
+            <td>Boolean</td>
+            <td>是否最大化</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>width</td>
+            <td>Number</td>
+            <td>宽度</td>
+            <td>400</td>
+        </tr>
+        <tr>
+            <td>height</td>
+            <td>Number</td>
+            <td>高度</td>
+            <td>300</td>
+        </tr>
+        <tr>
+            <td>splitSize</td>
+            <td>Number</td>
+            <td>分隔宽度(像素)</td>
+            <td>2</td>
+        </tr>
+    </table>
+    <div class="head">Methods(方法)：</div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Return</th>
+        </tr>
+        <tr>
+            <td>refresh</td>
+            <td></td>
+            <td>重新布局</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>reseth</td>
+            <td></td>
+            <td>重新布局高度</td>
+            <td></td>
+        </tr>
+
+    </table>
+    <div class="head">Events(事件):</div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Return</th>
+        </tr>
+    </table>
+    <div class="head">Region Object(面板对象)</div>
+<table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default</th>
+        </tr>
+        <tr>
+            <td>region</td>
+            <td>String</td>
+            <td>布局，top,bottom,left,giht,center之一</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>width</td>
+            <td>Number</td>
+            <td>宽度,top 和bottom，center 没有该属性</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>height</td>
+            <td>Number</td>
+            <td>高度,left.center,right没有该属性</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>String</td>
+            <td>是否显示标题</td>
+            <td>null</td>
+        </tr>
+        <tr>
+            <td>collapse</td>
+            <td>String</td>
+            <td>是否显示展开、收起按钮</td>
+            <td>null</td>
+        </tr>
+        <tr>
+            <td>close</td>
+            <td>Boolean</td>
+            <td>是否显示关闭按钮</td>
+            <td>true</td>
+        </tr>
+         <tr>
+            <td>headerIcon</td>
+            <td>String</td>
+            <td>标题的图标</td>
+            <td></td>
+        </tr>
+    
+
+    </table>
+
+      Examples(示例)
+       <a  href="javascript:exec({ url: 'demo/layout/layoutcode.html', text: 'layout示例' })"> glayout</a>
+
+</body>
+</html>
