@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../js/democolor.js"></script>
+    <link href="../../css/demostyle.css" rel="stylesheet" />
+</head>
+<body>
+   <div class="title">
+       <span class="sub1">gcombo</span>
+       <span class="sub2">(下拉选择框)</span>
+   </div>
+<pre>
+
+     &lt;div class="gcombo"  data-options="{data:[{id:1,text:'1111111'},{id:2,text:'2222222222'}]}"  &gt; &lt;/div&gt;
+        
+</pre>
+  
+    <div class="head" >Properties(属性)：</div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default</th>
+        </tr>
+            <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>对象名称，在form的getData中用到</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>width</td>
+            <td>Number</td>
+            <td>宽度</td>
+            <td>200</td>
+        </tr>
+            <tr>
+            <td>valueId</td>
+            <td>string</td>
+            <td>getValue时取值字段</td>
+            <td>id</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>string</td>
+            <td>数据源的id</td>
+            <td>id</td>
+        </tr>
+        <tr>
+            <td>text</td>
+            <td>string</td>
+            <td>数据源的文本,选择时显示的内容</td>
+            <td>text</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Array</td>
+            <td>数据源</td>
+            <td></td>
+        </tr>
+           <tr>
+            <td>value</td>
+            <td>string</td>
+            <td>初始值</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>url</td>
+            <td>string</td>
+            <td>数据源的url</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>poupuHeight</td>
+            <td>Number</td>
+            <td>弹出框的高度</td>
+            <td>200</td>
+        </tr>
+                <tr>
+            <td>poupuWidth</td>
+            <td>string</td>
+            <td>弹出框的宽度</td>
+            <td>200</td>
+        </tr>
+                      <tr>
+            <td>isup</td>
+            <td>boolean</td>
+            <td>弹出框是否在选择框上面</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>islockheight</td>
+            <td>boolean</td>
+            <td>是否固定高度</td>
+            <td>false</td>
+        </tr>
+
+         <tr>
+            <td>edit</td>
+            <td>boolean</td>
+            <td>是否允许键盘修改</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>isFilter</td>
+            <td>boolean</td>
+            <td>是否启用过滤</td>
+            <td>false</td>
+        </tr>
+
+            <tr>
+            <td>valid</td>
+            <td>function</td>
+            <td>验证函数
+                <pre>
+                        function comvalid(v) {
+                            if (!v ||v > 1) {
+                                this.validMessage = '只能选择第一个';
+                                return false;
+                            } else
+                            return true;
+                         }
+
+                </pre>
+
+            </td>
+            <td></td>
+        </tr>
+
+    </table>
+    <div class="head">Methods(方法)：</div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Return</th>
+        </tr>
+      <tr>
+            <td>setIndex</td>
+            <td>Number</td>
+            <td>根据数据源的序号设定combo的值</td>
+            <td></td>
+        </tr>
+      <tr>
+            <td>setValue</td>
+            <td>string</td>
+            <td>设定combo的ID</td>
+            <td></td>
+        </tr>
+  
+              <tr>
+            <td>setData</td>
+            <td>Array</td>
+            <td>设数据源</td>
+            <td></td>
+        </tr>
+                    <tr>
+            <td>disable</td>
+            <td>Bollean</td>
+            <td>true 为不活动状态, false 活动状态</td>
+            <td></td>
+        </tr>
+  
+
+          <tr>
+            <td>setUrl</td>
+            <td>string</td>
+            <td>设数据源的url</td>
+            <td></td>
+        </tr>
+
+                      <tr>
+            <td>getValue</td>
+            <td></td>
+            <td>获值</td>
+            <td>string</td>
+        </tr>
+
+                      <tr>
+            <td>getText</td>
+            <td></td>
+            <td>获取选择中的文本</td>
+            <td>string</td>
+        </tr>
+              <tr>
+            <td>getrecord</td>
+            <td></td>
+            <td>获选中的数据记录</td>
+            <td>object</td>
+        </tr>
+
+                      <tr>
+            <td>getIndexFromId</td>
+            <td>Number</td>
+            <td>通过ID获数据源中的序号</td>
+            <td>Number</td>
+        </tr>
+        <tr>
+            <td>valid</td>
+            <td>function</td>
+            <td>验证</td>
+            <td></td>
+        </tr>
+
+    </table>
+    <div class="head">Events(事件):</div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Return</th>
+        </tr>
+
+        <tr>
+            <td>onChange</td>
+            <td>function</td>
+            <td>值改变时确发</td>
+            <td></td>
+        </tr>
+
+
+    </table>
+ 
+        Examples(示例)
+       <a  href="javascript:exec({ url: 'demo/form/combocode.html', text: 'combo示例' })"> gcombo</a>
+
+</body>
+</html>

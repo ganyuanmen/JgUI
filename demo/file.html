@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+     <script src="../js/democolor.js"></script>
+    <link href="../css/demostyle.css" rel="stylesheet" />
+</head>
+<body>
+      <div class="inherrit">继承于：
+         <a href="javascript:exec({ url: 'demo/button.html', text: 'button' })">gbutton</a>
+     </div>
+       <div class="title">
+       <span class="sub1">gfile</span>
+       <span class="sub2">(文件选择、上传按钮)</span>
+   </div>
+
+<pre>
+
+    &lt;a class="gfile"  data-options="{icon:'add',fileChange,fileLoad:loadd}"&gt;选择文件&lt;/a&gt;
+        
+</pre>
+  
+    <div class="head" >Properties(属性)：</div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default</th>
+        </tr>
+        <tr>
+            <td>fileChange</td>
+            <td>function</td>
+            <td>选择文件后触发,用于检测文件类型 ，返回true时才能触发fileLoad</td>
+            <td>反回true</td>
+        </tr>
+        <tr>
+            <td>icon</td>
+            <td>string</td>
+            <td>按钮图标</td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>fileLoad</td>
+            <td>function</td>
+            <td>文件加载成功后触发，此处使用本地文件读取</td>
+            <td></td>
+        </tr>
+    </table>
+    Examples(示例) <br /><br />
+       <a  href="javascript:exec({ url: 'demo/filecode.html', text: '本地图片预览及转换' })"> 本地图片预览及转换</a><br /><br />
+       <a  href="javascript:exec({ url: 'demo/filecode2.html', text: '多文件上传' })"> 多文件上传</a><br /><br />
+       <a  href="javascript:exec({ url: 'demo/filecode3.html', text: '大文件分片上传' })">大文件分片上传</a>
+</body>
+</html>
