@@ -55,7 +55,6 @@ function jguiproto() {
 
 };
 jguiproto.prototype = {
-<<<<<<< HEAD
     ajax: function (o) {
         var obj=$.extend({
             type:'POST',
@@ -95,8 +94,6 @@ jguiproto.prototype = {
             success: fn
         });
     },
-=======
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
     //JSON字符串转JSON对象
     parseJSON: function (jstr) { if (typeof jstr == 'string') return eval('(' + jstr + ')'); else return jstr; },
     //获唯一数字编号
@@ -104,16 +101,11 @@ jguiproto.prototype = {
     //以窗口的方式打开src所在的网页
     open: function (obj) {
         var r = $('<div></div>').appendTo('body'); r.gwindow($.extend(obj, { close: { click: function () { r[0].destroy(); } } }));
-<<<<<<< HEAD
         var iframe = $('iframe', r)[0].contentWindow || $('iframe', r)[0].contentDocument; if (obj.onstart && $.isFunction(obj.onstart)) iframe.onload = function () { obj.onstart.call(iframe); };
-=======
-        var iframe = $('iframe', r)[0].contentWindow; if (obj.onstart && $.isFunction(obj.onstart)) iframe.onload = function () { obj.onstart.call(iframe); };
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
         if (obj.onclose && $.isFunction(obj.onclose)) $(iframe).on("unload", function () { obj.onclose.call(iframe, iframe.closeok); });
         return r;
     },
     //JSON对象转为JSON字符串
-<<<<<<< HEAD
     join: function (o, f, fa) {
         if (typeof (o) != 'object') return o; if (this.isemptyobj(o)) return ""; var r = (!fa ? "{" : ""); for (var a in o) {
             r += ((f ? '"' : '') + a + (f ? '"' : '') + ':' + (f ? '"' : '')
@@ -131,13 +123,6 @@ jguiproto.prototype = {
                 } r = r.substr(0, r.length - 1) + ';';
             }
         });
-=======
-    join: function (o, f) { if (typeof (o) != 'object') return o; if (this.isemptyobj(o)) return ""; var r = "{"; for (var a in o) { r += ((f ? '"' : '') + a + (f ? '"' : '') + ':' + (f ? '"' : '') + o[a] + (f ? '"' : '') + ","); } return r.substr(0, r.length - 1) + '}'; },
-    //JSON数组转为以;分隔的JSON串（不带比引号）
-    joinUrl: function (a) {
-        if (!$.isArray(a)) a = $.makeArray(a); var r = "";
-        a.forEach(function (v, i) { if (typeof (v) == 'object') { for (var a in v) { if (typeof (v[a]) == 'string') r += a + ':' + v[a].replace(/,/, '，').replace(/:/, '：').replace(/;/, '；') + ","; else r += a + ':' + v[a] + ","; } r = r.substr(0, r.length - 1) + ';'; } });
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
         r = r.substr(0, r.length - 1);
         return encodeURIComponent(r);
     },
@@ -152,7 +137,6 @@ jguiproto.prototype = {
     //创建FileReader
     _newreader: function () { var reader; if (typeof FileReader === 'undefined') jgui.alert(gmessage.file_read); else reader = new FileReader(); return reader; },
     //数据验证
-<<<<<<< HEAD
     _valid: function (_this, valid, type,tiptarget,ex) {
         var lok = true, tiptarget = tiptarget ? tiptarget : _this, _v =ex&&ex.value?ex.value:(_this.getValue?_this.getValue():(_this.value?_this.value:(_this.innerText||_this.textContent)));
         if ($(_this).attr('required') && !_v) {
@@ -173,29 +157,6 @@ jguiproto.prototype = {
         } else {
             if (tiptarget.removeTip) tiptarget.removeTip();
             if (ex && ex.value) $(_this).css('border-color','rgba(0,0,0,0)' );
-=======
-    _valid: function (_this, valid, type) {
-        var lok = true;
-        if ($(_this).attr('required') && !_this.getValue()) {
-            _this.validMessage = gmessage.valid_empty;
-            lok = false;
-        } else {
-            if (type === 'int') lok = /^\d+$/.test(_this.getValue());
-            if (lok) {
-                if (type == 'number') lok = !isNaN(_this.getValue());
-                if (lok)
-                { if (valid) { lok = valid.call(_this, _this.getValue()); }; }
-                else {
-                    _this.validMessage = gmessage.valid_number;
-                }
-            } else { _this.validMessage = gmessage.valid_int }
-        }
-        if (!lok) {
-            $(_this).css({ borderColor: 'red' });
-            $(_this).gtip({ shadow: true, text: _this.validMessage });
-        } else {
-            if (_this.removeTip) _this.removeTip();
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
         }
         return lok;
 
@@ -320,7 +281,6 @@ jguiproto.prototype = {
     },
     todate: function (str) {
         if (!str) return undefined;
-<<<<<<< HEAD
         if(str instanceof Date) return str;
         
         if ((typeof (str)).toLowerCase() == 'string') {
@@ -341,23 +301,6 @@ jguiproto.prototype = {
             } catch (e) {
                 cd = undefined;
             }
-=======
-        var cd = new Date(Date.parse(str));
-        try {
-            if (isNaN(cd)) {
-                var arys = str.split('-');
-                cd = new Date(arys[0], --arys[1], arys[2]);
-                if (cd.toString().indexOf('Invalid') > -1) {
-                    var arys = str.split(',');
-                    cd = new Date(arys[0], --arys[1], arys[2]);
-                    if (cd.toString().indexOf('Invalid') > -1) {
-                        cd = undefined;
-                    }
-                }
-            }
-        } catch (e) {
-            cd = undefined;
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
         }
         return cd;
     },
@@ -785,13 +728,8 @@ Date.prototype.add = function (v, n) {
         function _uploadblob(file, div, action) {
             div.children("span:first").html(file.name);
             var _a = div.children("span").eq(1).children("progress");
-<<<<<<< HEAD
             if (_a.length) _a.val(0); else _a = $('<progress class="gpro"></progress>').attr('max', 100).attr("value", 0).appendTo(div.children("span").eq(1));
             var _0 = 0, _1 = 2 * 1024 * 1024, _2 = Math.ceil(file.size / _1), _3 = 0, _4 = (new Date()).getTime();
-=======
-            if (_a.length) _a.val(0); else _a = $("<progress></progress>").attr('max', 100).attr("value", 0).appendTo(div.children("span").eq(1));
-            var _0 = 0, _1 = 2 * 1024 * 1024, _2 = Math.ceil(file.size / _1), _3 = 0, _4 = new Date().getTime();
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             var reader = jgui._newreader();
             reader.onprogress = function (e) { _0 += e.loaded; _a[0].value = Math.round((_0 / file.size) * 100); };
             reader.onload = function (e) {
@@ -803,11 +741,7 @@ Date.prototype.add = function (v, n) {
                     }
                     if (_3 == _2) { div.children("span:last").html('ok'); _a[0].value = 100; }
                 }, false);
-<<<<<<< HEAD
                 xhr.open("POST", action + "?f=" +encodeURIComponent(file.name) + "&guid=g_" + _4 + "&c=" + (new Date()).getTime());
-=======
-                xhr.open("POST", action + "?f=" +encodeURIComponent(file.name) + "&guid=g_" + _4 + "&c=" + new Date().getTime());
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                 xhr.setRequestHeader("gfalg", "1,"+_2+','+_3);
                 xhr.send(e.target.result);
             };
@@ -867,7 +801,6 @@ Date.prototype.add = function (v, n) {
             }, jgui.parseJSON(ofile.data('options')), options);
             ofile.gbutton({icon:op.icon});
             var _0 = jgui.getuid();
-<<<<<<< HEAD
              op.fileobj=$('<input type="file" />').attr('name', "$file" + _0).attr('id', "$file" + _0).appendTo(ofile);
              ofile.on('mousemove', function (e) {
                  op.fileobj.offset({ top: e.clientY - 15, left: e.clientX - 20 });
@@ -875,9 +808,6 @@ Date.prototype.add = function (v, n) {
             this.getValue = function () {
                 return op.fileobj[0].files[0];
             };
-=======
-            $('<input type="file" />').attr('name', "$file" + _0).attr('id', "$file" + _0).appendTo(ofile);
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             if (op.multiple) { 
                 op.files = [];
                 ofile.wrap("<div></div>").wrap("<div></div>");
@@ -909,11 +839,7 @@ Date.prototype.add = function (v, n) {
                             op.files[op.files.length - 1]['divobj'] = _0 = $('<div></div>').addClass('filediv').attr("index", op.files.length - 1).appendTo(op.gdiv);
                             _0.html('<span></span><span></span><span></span><span></span>');
                             _0.children("span:first").html(file.name);
-<<<<<<< HEAD
                             $('<progress class="gpro"></progress>').attr('max', 100).attr("value", 0).appendTo(_0.children("span").eq(1));
-=======
-                            $("<progress></progress>").attr('max', 100).attr("value", 0).appendTo(_0.children("span").eq(1));
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                             $("<a></a>").html(gmessage.file_del).gbutton({ icon: 'remove', click: _remove, target: { arr: op.files, obj: _0 } }).appendTo(_0.children("span").eq(2));
                         }
                     }
@@ -1079,21 +1005,14 @@ Date.prototype.add = function (v, n) {
             }).on('blur', function () {
                 ocombo.css({ boxShadow: '', borderColor: (op._vresult ? '#d2d2d2' : 'red') });
             }).on("change", function () {
-<<<<<<< HEAD
                 if (ocombo[0].valid() && op.textobj.removeTip) op.textobj.removeTip();
-=======
-                if (ocombo[0].valid() && ocombo[0].removeTip) ocombo[0].removeTip();
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             });
             this.get = function (a) {return op[a] };
             this.setIndex = function (i) {
                 if (op.data)
                     if (op.data[i]) _set(i, op, ocombo);
             };
-<<<<<<< HEAD
             this.clear = function () { op.textobj.val(''); ocombo.data('index', -1); };
-=======
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             this.setValue = function (cid) {
                 if (op.data) {
                     var lok = true;
@@ -1186,11 +1105,7 @@ Date.prototype.add = function (v, n) {
                 }
                 return i;
             };
-<<<<<<< HEAD
             this.valid = function () { op._vresult = jgui._valid(this, op.valid,null,op.textobj); return op._vresult; };
-=======
-            this.valid = function () { op._vresult = jgui._valid(this, op.valid); return op._vresult; };
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             init(ocombo, op);
             ocombo.data('options', op);
         });
@@ -1304,7 +1219,6 @@ Date.prototype.add = function (v, n) {
         function _click(e, op) {
             if (op.leafNode) {
                 if (this.children('span').find('.gtree-leaf').length) {
-<<<<<<< HEAD
                     settree(op,e);
                 }
             } else settree(op,e);
@@ -1315,28 +1229,12 @@ Date.prototype.add = function (v, n) {
             op.textobj.trigger('change').trigger('blur');
             op.poupuobj.hide();
             if (op.onChange && $.isFunction(op.onChange)) op.onChange.call(this, op.tree_id);
-=======
-                    settree();
-                }
-            } else settree();
-            function settree()
-            {
-                op.tree_id = e.id;
-                op.textobj.val(e.text);
-                op.textobj.trigger('change').trigger('blur'); 
-                op.poupuobj.hide();
-            }
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
         }
         return this.each(function () {
             var otreeselect = $(this);
             var op = $.extend({
-<<<<<<< HEAD
                 leafNode: false,
                 onChange:null
-=======
-                leafNode:false
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             }, jgui.parseJSON($(this).data('options')), options);
             otreeselect.gcombo($.extend(op,{ _iscombo: false,_type:'treeselect',islockheight: true }));
             op = otreeselect.data('options');
@@ -1348,25 +1246,15 @@ Date.prototype.add = function (v, n) {
             this.setValue = function (cid) {
                 op.treeobj[0].geach(function (e) {
                     if (e.id == cid) {
-<<<<<<< HEAD
                         settree(op, e); return false;
-=======
-                        op.tree_id = e.id;
-                        op.textobj.val(e.text);
-                        op.textobj.trigger('change').trigger('blur'); 
-                        op.poupuobj.hide(); return false;
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                     }
                     else return true;
                 });
             };
-<<<<<<< HEAD
             this.clear = function () {
                 op.tree_id = -1;
                 op.textobj.val('');
             };
-=======
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             this.setUrl = function (url) { 
                     op.tree_id = undefined;
                     op.textobj.val('');
@@ -1463,21 +1351,13 @@ Date.prototype.add = function (v, n) {
             if (bit && bit[0]) o.bit = bit[0];
             return jgui.genenumber(o);
         };
-<<<<<<< HEAD
         function genecell(v, row,vv) {
             var vv = vv!==undefined ? vv : row[v.field];
             if (v.dateFormat && /^\/Date\(/.test(vv)) {
-=======
-        function genecell(v, row, ogrid) {
-            var obj = ogrid.data;
-            var vv = obj[row][v.field];
-            if (v.dateFormat) {
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                 var a = /\d+/.exec(vv);
                 var riqi = new Date(parseInt(a[0]));
                 vv = riqi.format(v.dateFormat);
             } else {
-<<<<<<< HEAD
                 if (v.render) vv = v.render.call(this, { record: row, value: vv });
                 if (v.format) vv = getformat(vv, v.format);
             }
@@ -1564,37 +1444,19 @@ Date.prototype.add = function (v, n) {
             return _;
         }
 
-=======
-                if (v.render) vv = v.render.call(this, { record: obj[row], value: vv });
-                if (v.format) vv = getformat(vv, v.format);
-            }
-            return '<div>' + vv + '</div>';
-        }
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
         function settitle(ogrid, osum, op, obody) {
             var tr = ogrid.children('thead').children('tr'); 
             var trs = tr.length;
             var otd = tr.eq(trs - 1).children('td').get();
-<<<<<<< HEAD
             for (var k = trs - 2; k > -1; k--) {
-=======
-            for (var k = trs - 2; k > -1; k--) 
-            {
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                 tr.eq(k).children('td').each(function (i, v) {
                     if (parseInt($(v).attr('rowspan')) == trs - k) {
                         otd.push(v)
                     }
                 });
-<<<<<<< HEAD
             };
             var ftr1 = $('<tr></tr>').height(0).prependTo(ogrid.children('thead')); 
             var ftr2 = $('<tr></tr>').height(0).prependTo(obody.children('tbody')); 
-=======
-            }
-            var ftr1 = $('<tr></tr>').height(0).prependTo(ogrid.children('thead')); //第一行用于控制宽度
-            var ftr2 = $('<tr></tr>').height(0).prependTo(obody.children('tbody')); //第一行用于控制宽度
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             if (op.sumobj) {
                 var ftr3 = $('<tr></tr>').height(0).prependTo(osum.children('tbody'));
                 var ftr4 = $('<tr></tr>').appendTo(osum.children('tbody'));
@@ -1723,17 +1585,12 @@ Date.prototype.add = function (v, n) {
                 });
         };
         function setbody(ogrid, obody, op, obj) {
-<<<<<<< HEAD
             ogrid.op.data = obj = jgui.parseJSON(obj);
             ogrid.op.editdata = [];
-=======
-            ogrid.data = ogrid.op.data = obj = jgui.parseJSON(obj);
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             obody.children('tbody').children('tr:gt(0)').remove();
             for (var j = 0, l = obj.length; j < l; j++) {
                 var tr = $('<tr></tr>').data('index', j);
                 ogrid.op.otd.forEach(function (v, i) {
-<<<<<<< HEAD
                     var _td = $('<td></td>').data('options', { row: j, col: i }).appendTo(tr);
                     if (v && v.type == "indexCol") _td.html(1 + j + (op.pageIndex - 1) * op.pageSize).css('text-align', 'center');
                     else if (v && v.field && obj[j][v.field] !== undefined) 
@@ -1758,30 +1615,6 @@ Date.prototype.add = function (v, n) {
                 if (op.width < 0) jgui.setw(obody.parent().parent()); else obody.parent().parent().width(op.width);
                 if (op.height < 0) jgui.seth(obody.parent().parent()); else obody.parent().parent().height(op.height);
             }
-=======
-                    var divstr = '<td></td>';
-                    if (v && v.type == "indexCol") {
-                        divstr = '<td style="text-align:center">' + (1 + j + (op.pageIndex - 1) * op.pageSize) + '</td>';
-                    }
-                    else
-                        if (v && v.field && obj[j][v.field] != undefined) {
-                            divstr = '<td style="' + ((v.align && 'right,left,center'.indexOf(v.align) > -1) ? "text-align:" + v.align : "") + '">' + genecell(v, j, ogrid) + '</td>';
-                        }
-                    var _0 = $(divstr).data('options', { row: j, col: i }).appendTo(tr);
-                    if (v.jQrender) { v.jQrender.call(this, { jq: _0, record: op.data[j],index:j }); }  
-                });
-                if (op.onRowDraw) op.onRowDraw.call(tr, obj[j]);
-                obody.append(tr);
-            }
-            if (op.onload &&$.isFunction(op.onload)) op.onload.call(this, op);
-        };
-        function setxy(obody, op) {
-            obody.css({ overflow: 'hidden', display: 'none' });
-            if (op.fit)  
-                jgui.seth(obody.parent().parent());
-            else  
-                obody.parent().parent().css({ width: op.width, height: op.height });
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             jgui.seth(obody.parent()); 
             obody.css({ display: 'table' });
         }
@@ -1869,23 +1702,6 @@ Date.prototype.add = function (v, n) {
                            obody.selectcell = $(this);
                            var a = obody.selectcell.children('div');
                            a.css({ backgroundColor: '#EAF2FF' });
-<<<<<<< HEAD
-=======
-                           var c = ogrid.op.otd[b.col].edit;
-                           if (c) {
-                               if (c == 'text') {
-                                   var d = $('<input type="text" style="width:100%;border:0;"></input>').val(ogrid.data[b.row][ogrid.op.otd[b.col].field]);
-                                   d.blur(function (e) {
-                                       refreshcell(obody);
-                                       var v = $(this).val();
-                                       ogrid.data[b.row][ogrid.op.otd[b.col].field] = v;
-                                       a.parent().empty().append(genecell(ogrid.op.otd[b.col], b.row, ogrid));
-                                   }).on('keypress', function (e) { if (e.which == 13) $(this).triggerHandler('blur'); else if (e.which == 27) { a.parent().empty().append(genecell(ogrid.op.otd[b.col], b.row, ogrid)); refreshcell(obody); } });
-                                   a.empty().append(d);
-                                   d.select().focus();
-                               }
-                           }
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                        }
                    });
         };
@@ -1906,10 +1722,7 @@ Date.prototype.add = function (v, n) {
                 dataList: [{ id: 20, text: '20' }, { id: 30, text: '30' }, { id: 40, text: '40' }, { id: 80, text: '80' }, { id: 120, text: '120' }],
                 pageSize: 20,
                 pageIndex: 1,
-<<<<<<< HEAD
                 dataKey:'id',
-=======
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                 sortField: 'id',
                 onload: null,
                 sortOrder: 'asc',
@@ -1943,20 +1756,13 @@ Date.prototype.add = function (v, n) {
                 else
                 return op[name]
             };
-<<<<<<< HEAD
             this.getSelect = function () { if (obody.selectrow) return ogrid.op.data[obody.selectrow.data('index')]; };
             this.selectRow = function (i) {
                 var l = ogrid.op.data.length;
-=======
-            this.getSelect = function () { if (obody.selectrow) return ogrid.data[obody.selectrow.data('index')]; };
-            this.selectRow = function (i) {
-                var l = ogrid.data.length;
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                 if (i < 1 || i > l - 1) return;
                 var tr = obody.children('tbody').children('tr:eq(' + i + ')');
                 if (tr.length) tr.trigger('click');
             };
-<<<<<<< HEAD
             this.getData = function () { return ogrid.op.data; };
             this.getEditData = function () {
                 return $.grep($.map(ogrid.op.editdata, function (v, i) {
@@ -1982,9 +1788,6 @@ Date.prototype.add = function (v, n) {
                 }
                 return _0;
             };
-=======
-            this.getData = function () { return ogrid.data; };
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             this.setData = function (obj) {
                 if (obj) {
                     op.recordTotal = obj.length;
@@ -1996,30 +1799,17 @@ Date.prototype.add = function (v, n) {
                 if (!i && !j)
                     if (op.cellSelect && obody.selectcell) {
                         var a = obody.selectcell.data('options');
-<<<<<<< HEAD
                         return ogrid.op.data[a.row][ogrid.op.otd[a.col].field];
                     }
                     else if (!isNaN(i) && !isNaN(j)) {
                         var l = ogrid.op.data.length, k = ogrid.op.otd.length;
                         if (i < 1 || i > l - 1 || j < 0 || j > k - 1) return;
                         return ogrid.op.data[i - 1][ogrid.op.otd[j - 1].field];
-=======
-                        return ogrid.data[a.row][ogrid.op.otd[a.col].field];
-                    }
-                    else if (!isNaN(i) && !isNaN(j)) {
-                        var l = ogrid.data.length, k = ogrid.op.otd.length;
-                        if (i < 1 || i > l - 1 || j < 0 || j > k - 1) return;
-                        return ogrid.data[i - 1][ogrid.op.otd[j - 1].field];
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                     }
             };
             this.setCell = function (i, j) {
                 if (op.cellSelect) {
-<<<<<<< HEAD
                     var l = op.data.length, k = ogrid.op.otd.length;
-=======
-                    var l = ogrid.data.length, k = ogrid.op.otd.length;
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                     if (i < 1 || i > l - 1 || j < 0 || j > k - 1) return false;
                     obody.children('tbody').children('tr:eq(' + i + ')').children('td:eq(' + (j - 1) + ')').trigger('click');
                 }
@@ -2609,19 +2399,11 @@ Date.prototype.add = function (v, n) {
             $('*[name]', oform).each(function (i, o) {
                 var name = $(o).attr('name');
                 var v = _genevalue(name, o);
-<<<<<<< HEAD
                 if (!(v === undefined) && (fa || v != op[name] || $(o).attr('type') == 'hidden')) r[name] = v;
             });
             return r;
          };
         function _genevalue(name, obj) {
-=======
-                if (!(v === undefined) && (fa || v != op[name])) r[name] = v;
-            });
-            return r;
-         };
-          function _genevalue(name, obj) {
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
              var v = undefined;
              if (name && !/^[\$]\.*/.test(name)) { 
                  if (obj.getValue) {
@@ -2630,11 +2412,7 @@ Date.prototype.add = function (v, n) {
                  }
                  else {
                      if (typeof (obj.value) == 'string') 
-<<<<<<< HEAD
                          v = obj.value;
-=======
-                         obj[name] = obj.value;
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                  }
              }
              return v;
@@ -2644,7 +2422,6 @@ Date.prototype.add = function (v, n) {
             this.setData = function (o) {
                 if (typeof (o) != 'object') return;
                 this.saveData();
-<<<<<<< HEAD
                 for (var _ in o) {
                     if (o[_] === null || o[_] === undefined) op[_] = '';
                     else
@@ -2660,17 +2437,6 @@ Date.prototype.add = function (v, n) {
                         else {
                             if (typeof (b.value) == 'string') 
                                 b.value = op[_];
-=======
-                $.extend(op, o);
-                for (var a in o) {
-                    var b = jgui.getname(a, oform);
-                    if (b) {
-                        if (b.setValue)  
-                            b.setValue(o[a]);
-                        else {
-                            if (typeof (b.value) == 'string') 
-                                b.value = o[a];
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                             if (b.tagName.toLowerCase() == 'input')
                                 $(b).trigger("change").trigger("blur");
                         }
@@ -2726,18 +2492,10 @@ Date.prototype.add = function (v, n) {
                 owindow[0].drag();
             }
             owindow[0].seth(op.fit);
-<<<<<<< HEAD
             if (!op.closed) owindow[0].open(op.fit); else owindow.hide();
         }
         return this.each(function () {
             var owindow = $(this);
-=======
-            if (!op.closed) owindow[0].open(); else owindow.hide();
-        }
-        return this.each(function () {
-            var owindow = $(this);
-
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
             var op = $.extend({
                 header: '',
                 headerIcon: '',
@@ -2769,14 +2527,11 @@ Date.prototype.add = function (v, n) {
                 if (fit) {  
                     owindow.css({ top: 0, left: 0 }).outerHeight($(window).height(), true).outerWidth($(window).width(), true);
                     jgui.seth(op.gcontent);
-<<<<<<< HEAD
                     var _0 = op.gcontent.children('iframe');
                     if (_0.length) {
                         _0.outerHeight(op.gcontent.height(), true);
                     }
                     
-=======
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                     owindow.css('width', '');
                 }
                 else {
@@ -2797,19 +2552,11 @@ Date.prototype.add = function (v, n) {
             this.drag = function () {
                 op.gheader.find('td').eq(0).gdraggle({ title: function () { return owindow; }, xy: 'xy' });
             };
-<<<<<<< HEAD
             this.open = function (fit) {
                 if (op.maskobj) op.maskobj.show();
                 if (op.maxobj) {
                     op.maxobj.removeClass('g-restore').addClass('g-max');
                     this.seth(fit);
-=======
-            this.open = function () {
-                if (op.maskobj) op.maskobj.show();
-                if (op.maxobj) {
-                    op.maxobj.removeClass('g-restore').addClass('g-max');
-                    this.seth(false);
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
                 }
                 owindow.show();
             };
@@ -2953,11 +2700,7 @@ Date.prototype.add = function (v, n) {
             jq.off('mouseover').on('mouseover', function (e) {
                 jq[0].showTip();
             })
-<<<<<<< HEAD
             .off('mouseleave').on('mouseleave', function (e) { jq.data('over', false); otip.hide(); });
-=======
-            .off('mouseout').on('mouseout', function (e) { jq.data('over', false); otip.hide(); });
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
 
         });
     };
