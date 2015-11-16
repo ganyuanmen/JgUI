@@ -35,7 +35,13 @@ input::-ms-clear { display: none; }
 }
 .gfile input {
     position: absolute;
+<<<<<<< HEAD
     width:30px;
+=======
+    /*font-size: 90px;*/
+    right: 0;
+    top: 0;
+>>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
     opacity: 0;
 }
 
@@ -115,6 +121,7 @@ input::-ms-clear { display: none; }
 }
 /*gtree------------------------------------------------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
 .gtree, .gtree ul{position:relative;display:block; height: auto; margin:0;padding:0;    white-space:nowrap;  word-break:keep-all;
     -webkit-touch-callout:none;
 	-webkit-user-select:none;
@@ -124,6 +131,9 @@ input::-ms-clear { display: none; }
 	user-select:none;
 
 }
+=======
+.gtree, .gtree ul{position:relative;display:block; height: auto; margin:0;padding:0;    white-space:nowrap;  word-break:keep-all;}
+>>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
 .gtree li {
      font-size:9pt;
     font-family:Tahoma, Verdana, 宋体;
@@ -484,8 +494,12 @@ input::-ms-clear { display: none; }
     }
 
 .ggrid  td>div>div:first-child ,.gbody  td>div {
+<<<<<<< HEAD
     height:22px;    
     line-height: 22px;
+=======
+        line-height: 22px;
+>>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
         overflow: hidden;
         font-size: 9pt;
         /*background-color:red;*/
@@ -498,9 +512,13 @@ input::-ms-clear { display: none; }
         text-overflow: ellipsis;
 
     }
+<<<<<<< HEAD
     .gbody td > div {
         border:1px solid rgba(0,0,0,0);
     }
+=======
+
+>>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
 .ggrid td>div>div:last-child {
       position: absolute;
         overflow: hidden;
@@ -805,7 +823,11 @@ input::-ms-clear { display: none; }
 
 }
 
+<<<<<<< HEAD
  .gpro {
+=======
+progress {
+>>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
     background: #fff;
     border-radius: 10px; border: 5px double #aaa;
     display: block;
