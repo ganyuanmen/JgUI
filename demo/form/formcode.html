@@ -34,7 +34,7 @@
 
                     <tr>
                         <td style="width:100px;text-align:right;">部门：</td>
-                        <td><ul id="treeselect1" required="true"  data-options="{url: '../../data/tree.txt',name:'bumen',leafNode:true}" class="gtreeselect"></ul></td>
+                        <td><ul id="treeselect1" required="true"  data-options="{name:'bumen',leafNode:true}" class="gtreeselect"></ul></td>
                         <td style="text-align:right;">年龄：</td>
                         <td><input class="gtext" name="nl" data-options="{width:123,validType:'int',valid:checknl}" /></td>
                     </tr>
@@ -65,7 +65,34 @@
    
 <script>
     var ihtml = document.body.innerHTML;
-  
+    var data = [
+{ id: "_1", pid: "-1", text: "所有公司", expand: true },
+{ id: "0", pid: "_1", text: "A公司" },
+{ id: "0A", pid: "0", text: "A公司行政部" },
+{ id: "0AA", pid: "0A", text: "部长" },
+{ id: "0AB", pid: "0A", text: "副部长" },
+{ id: "0AC", pid: "0A", text: "业务员" },
+{ id: "0B", pid: "0", text: "A公司企业管理部" },
+{ id: "0BA", pid: "0B", text: "考核员" },
+{ id: "0BB", pid: "0B", text: "办事员" },
+{ id: "0C", pid: "0", text: "A公司采购部" },
+{ id: "0CA", pid: "0C", text: "采购经理" },
+{ id: "0CB", pid: "0C", text: "采购员" },
+{ id: "0D", pid: "0", text: "A公司财务部" },
+{ id: "0DA", pid: "0D", text: "会计" },
+{ id: "0DB", pid: "0D", text: "出纳员" },
+{ id: "1", pid: "_1", text: "B公司" },
+{ id: "1A", pid: "1", text: "B公司生产科" },
+{ id: "1AA", pid: "1A", text: "科长" },
+{ id: "1AB", pid: "1A", text: "副科长" },
+{ id: "1AC", pid: "1A", text: "调度员" },
+{ id: "1AD", pid: "1A", text: "调试员" },
+{ id: "1B", pid: "1", text: "B公司企业管理部" },
+{ id: "1BA", pid: "1B", text: "考核员" },
+{ id: "1BB", pid: "1B", text: "办事员" }
+    ];
+    //如果发布在web服务器上 直接设url即可 url: "../data/tree.txt"
+    window.onload = function () { treeselect1.setData(data); };
     function set1() {
         form1.setData({ id: 2232, riqi: '2015-01-01', ban: '乙班', bumen: '1AA', nl: 28, fk: 45.6, bh: 900 });
     }
