@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title></title>
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/jgui-1.0.min.js"></script>
+    <link href="../css/jgui.css" rel="stylesheet" />
+    <link href="../css/icon.css" rel="stylesheet" />
+    <script src="../js/demo.js"></script>
+    <style>
+        .div{display:table-cell; padding:10px;}
+    </style>
+</head>
+<body style="padding:2px;">
+    <div style="margin:10px;">
+        <fieldset>
+            <legend>本地预览图片</legend>
+        <div class="gtoolbar" >
+            <a class="gfile"  data-options="{icon:'add',fileChange:filechange,fileLoad:onload}">选择文件</a>
+            <span style="color:red;">用canvas拷贝图片</span>
+
+        </div>
+            <br />
+            <div class="div">
+	            <img alt="图片显示区域" id="img0"  src="" />
+             </div>
+            <div class="div" style=" vertical-align:middle;">
+                <a class="gbutton" data-options="{icon:'copy',click:copy}">复制图片</a>
+            </div>
+            
+            <div id="can" class="div" " >   </div>
+            <div class="div" style=" vertical-align:middle;">
+                <a class="gbutton" data-options="{icon:'add',click:copy1}">加签名</a>
+                <br />
+                <a class="gbutton" data-options="{icon:'ok',click:copy2}">生成图</a>
+            </div>
+            <div id="div1" class="div" " >   </div>
+        </fieldset>
+        <br />
+    </div>    
+    
+<script>
+    var ihtml = document.body.innerHTML;
+    var canvas = document.createElement("canvas");
+    function filechange(file) {
+        if (!/image\/\w+/.test(file.type)) {
+            jgui.alert("请选择图片类型的文件！");
+            return false;
+        }
+        else return true;
+    }
+
+    function onload(e) {
+        var image = new Image();
+        image.src = e;
+        setTimeout(function () {
+            if (image.width > 200) img0.width = 200;
+            else {
+                if (image.height > 180) img0.height = 180;
+            }
+            img0.src = e;
+            image = null;
+            delete image;
+        }, 200);
+    }
+
+    function copy() {
+        var image = new Image();
+        image.src = img0.src;
+        canvas.width = img0.width;
+        canvas.height = img0.height;
+        canvas.getContext("2d").drawImage(img0, 0, 0, image.width, image.height, 0, 0, img0.width, img0.height);
+        can.removeChild(can.childNodes[0]);
+        can.appendChild(canvas);
+        image = null;
+        delete image;
+    }
+
+    function copy1() {
+        var image = new Image();
+        image.src = '../css/jj.gif';
+        setTimeout(function () {
+            canvas.getContext("2d").drawImage(image, canvas.width - 60, canvas.height - 30, 50, 30);
+            image = null;
+            delete image;
+        }, 100);
+    }
+
+    function copy2() {
+        var image = new Image();
+        image.src = canvas.toDataURL("image/png");
+        div1.removeChild(div1.childNodes[0]);
+        div1.appendChild(image);
+    }
+
+</script>
+
+</body>
+</html>

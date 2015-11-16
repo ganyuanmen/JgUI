@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../js/jquery-2.1.3.min.js"></script>
+    <script src="../../js/jgui-1.0.min.js"></script>
+    <link href="../../css/jgui.css" rel="stylesheet" />
+    <link href="../../css/icon.css" rel="stylesheet" />
+    <script src="../../js/demo.js"></script>
+
+</head>
+
+<body style=" margin:10px;">
+    <fieldset>
+        <legend>treeselect基本功能</legend>
+        
+        <div class="gtoolbar">
+            <a class="gbutton" data-options="{click:getvalue,icon:'add'}">getValue</a>
+            <a class="gbutton" data-options="{click:gettext,icon:'edit'}">getText</a>
+            <a class="gbutton" data-options="{click:setValue,icon:'edit'}">setValue</a>
+        </div>
+        <br />
+        <ul id="mytreeselect" data-options="{checkboxNode:true,width:120}" class="gtreeselect"></ul>
+        <br />
+        <div>result:</div>
+        <textarea cols="80"></textarea>
+    </fieldset>
+    <br />
+    <fieldset>
+        <legend>treeselect 自定义验证</legend>
+        <div class="gtoolbar">
+            <a class="gbutton" data-options="{click:check1,icon:'add'}">验证</a>
+            ID不能大于10
+        </div>
+        <br />
+        <ul id="mytreeselect2" data-options="{valid:mycheck1}" class="gtreeselect"></ul>
+        <br />
+        <div>result:</div>
+        <textarea cols="80"></textarea>
+    </fieldset>
+
+    <br />
+    <fieldset>
+        <legend>treeselect 只允许leafNode 被选择</legend>
+
+        <div class="gtoolbar">
+            <a class="gbutton" data-options="{click:getvalue1,icon:'add'}">getValue</a>
+            <a class="gbutton" data-options="{click:gettext1,icon:'edit'}">getText</a>
+
+        </div>
+        <br />
+        <ul id="mytreeselect1" data-options="{leafNode:true}" class="gtreeselect"></ul>
+        <br />
+        <div>result:</div>
+        <textarea cols="80"></textarea>
+    </fieldset>
+
+
+</body>
+
+</html>
+
+<script>
+    var ihtml = document.body.innerHTML;
+    var riqi = jgui.get('mydate');
+    function getvalue() {
+        $('textarea:first').val('getValue:' + mytreeselect.getValue());
+    }
+    function gettext() {
+        $('textarea:first').val('getText:' + mytreeselect.getText());
+    }
+    function getvalue1() {
+        $('textarea:last').val('getValue:' + mytreeselect1.getValue());
+    }
+    function gettext1() {
+        $('textarea:last').val('getText:' + mytreeselect1.getText());
+    }
+    function mycheck1(v) {
+        if (parseInt(v) > 10 || !v) {
+            this.validMessage = '选择的ID不能大于10';
+            return false;
+        } else
+            return true;
+    }
+    function check1() {
+        $('textarea').eq(1).val(mytreeselect2.getText() + ":" + (mytreeselect2.valid() ? "验证通过！" : '验证失败！'));
+    }
+    function setValue() {
+        mytreeselect.setValue('6');
+    }
+    var data = [
+{ "id": "1", "pid": "0", "text": "根目录", expand: true },
+{ "id": "2", "pid": "1", "text": "第一层1", "url": "demo/layout/panel.html" },
+{ "id": "6", "pid": "2", "text": "第二层1", "url": "demo/layout/layout.html" },
+{ "id": "7", "pid": "2", "text": "第二层2", "url": "demo/layout/titlebar.html" },
+{ "id": "9", "pid": "6", "text": "第三层1", "url": "demo/layout/window.html" },
+{ "id": "10", "pid": "6", "text": "第三层2", "url": "demo/combo.html" },
+{ "id": "11", "pid": "10", "text": "第四层1", "url": "demo/grid.html" },
+{ "id": "12", "pid": "7", "text": "第二层3", "url": "demo/tree.html" },
+{ "id": "13", "pid": "12", "text": "第三层3", "url": "demo/date.html" },
+{ "id": "15", "pid": "13", "text": "第四层2", "url": "demo/tabs.html" },
+{ "id": "17", "pid": "1", "text": "第一层2", "url": "demo/button.html" },
+{ "id": "18", "pid": "17", "text": "text", "url": "demo/text.html" },
+{ "id": "19", "pid": "18", "text": "form", "url": "demo/form.html" }
+    ];
+    window.onload = function () {
+        mytreeselect.setData(data); mytreeselect1.setData(data); mytreeselect2.setData(data);
+    };
+
+
+</script>
