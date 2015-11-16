@@ -106,11 +106,7 @@
 <script>
     var ihtml = document.body.innerHTML;
     var grid = jgui.get('mygrid'),data;
-<<<<<<< HEAD
     function initdata(e) { if (!data) data = e.getData(); }
-=======
-    function initdata(e) { if (!data) data = e.data; }
->>>>>>> 865a60faadfbd57b185ab63972fe64df1f25f253
     function toexcel() {
         grid.toExcel('../../jguiapp.ashx', function (e) { jgui.alert(e, 400) });
     }
