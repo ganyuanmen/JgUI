@@ -55,6 +55,45 @@ function jguiproto() {
 
 };
 jguiproto.prototype = {
+    ajax: function (o) {
+        var obj=$.extend({
+            type:'POST',
+            data: null,
+            responeType:'text',
+            timeout:10000
+        },o);
+        var _da = new FormData();
+        if ((typeof (obj.data)).toLowerCase() == 'object')
+        {
+            for (var _ in obj.data) {
+                _da.append(_, obj.data[_]);
+            }
+        }
+         var xhr = new XMLHttpRequest();
+         xhr.open(obj.type, obj.url, true);
+         xhr.responseType = obj.responeType;
+         xhr.onreadystatechange = function (e) {
+             if (xhr.readyState == 4 && xhr.status == 200) {
+                 if (obj.success && $.isFunction(obj.success)) obj.success.call(this, (xhr.responeType == 'text' ? xhr.responseText : xhr.response));
+             }
+         };
+          xhr.send(_da);
+    },
+    post: function (url, data, fn) {
+        this.ajax({
+            url: url,
+            data: data,
+            success: fn
+        });
+    },
+    get: function () {
+        this.ajax({
+            type:'GET',
+            url: url,
+            data: data,
+            success: fn
+        });
+    },
     //JSON字符串转JSON对象
     parseJSON: function (jstr) { if (typeof jstr == 'string') return eval('(' + jstr + ')'); else return jstr; },
     //获唯一数字编号
@@ -62,16 +101,28 @@ jguiproto.prototype = {
     //以窗口的方式打开src所在的网页
     open: function (obj) {
         var r = $('<div></div>').appendTo('body'); r.gwindow($.extend(obj, { close: { click: function () { r[0].destroy(); } } }));
-        var iframe = $('iframe', r)[0].contentWindow; if (obj.onstart && $.isFunction(obj.onstart)) iframe.onload = function () { obj.onstart.call(iframe); };
+        var iframe = $('iframe', r)[0].contentWindow || $('iframe', r)[0].contentDocument; if (obj.onstart && $.isFunction(obj.onstart)) iframe.onload = function () { obj.onstart.call(iframe); };
         if (obj.onclose && $.isFunction(obj.onclose)) $(iframe).on("unload", function () { obj.onclose.call(iframe, iframe.closeok); });
         return r;
     },
     //JSON对象转为JSON字符串
-    join: function (o, f) { if (typeof (o) != 'object') return o; if (this.isemptyobj(o)) return ""; var r = "{"; for (var a in o) { r += ((f ? '"' : '') + a + (f ? '"' : '') + ':' + (f ? '"' : '') + o[a] + (f ? '"' : '') + ","); } return r.substr(0, r.length - 1) + '}'; },
+    join: function (o, f, fa) {
+        if (typeof (o) != 'object') return o; if (this.isemptyobj(o)) return ""; var r = (!fa ? "{" : ""); for (var a in o) {
+            r += ((f ? '"' : '') + a + (f ? '"' : '') + ':' + (f ? '"' : '')
+                + (o[a] + '').replace(/,/g, "\uff0c").replace(/:/g, "\uff1a") + (f ? '"' : '') + ",");
+        }  return r.substr(0, r.length - 1) + (!fa ? '}' : "");
+    },
     //JSON数组转为以;分隔的JSON串（不带比引号）
     joinUrl: function (a) {
         if (!$.isArray(a)) a = $.makeArray(a); var r = "";
-        a.forEach(function (v, i) { if (typeof (v) == 'object') { for (var a in v) { if (typeof (v[a]) == 'string') r += a + ':' + v[a].replace(/,/, '，').replace(/:/, '：').replace(/;/, '；') + ","; else r += a + ':' + v[a] + ","; } r = r.substr(0, r.length - 1) + ';'; } });
+        a.forEach(function (v, i) {
+            if (typeof (v) == 'object') {
+                for (var a in v) {
+                    if (typeof (v[a]) == 'string') r += a + ':' + v[a].replace(/,/,"\uff0c").replace(/:/, "\uff1a").replace(/;/, "\uff1b") + ",";
+                    else r += a + ':' + v[a] + ",";
+                } r = r.substr(0, r.length - 1) + ';';
+            }
+        });
         r = r.substr(0, r.length - 1);
         return encodeURIComponent(r);
     },
@@ -86,27 +137,26 @@ jguiproto.prototype = {
     //创建FileReader
     _newreader: function () { var reader; if (typeof FileReader === 'undefined') jgui.alert(gmessage.file_read); else reader = new FileReader(); return reader; },
     //数据验证
-    _valid: function (_this, valid, type) {
-        var lok = true;
-        if ($(_this).attr('required') && !_this.getValue()) {
+    _valid: function (_this, valid, type,tiptarget,ex) {
+        var lok = true, tiptarget = tiptarget ? tiptarget : _this, _v =ex&&ex.value?ex.value:(_this.getValue?_this.getValue():(_this.value?_this.value:(_this.innerText||_this.textContent)));
+        if ($(_this).attr('required') && !_v) {
             _this.validMessage = gmessage.valid_empty;
             lok = false;
         } else {
-            if (type === 'int') lok = /^\d+$/.test(_this.getValue());
+            if (type === 'int') lok = /^\d+$/.test(_v);
             if (lok) {
-                if (type == 'number') lok = !isNaN(_this.getValue());
+                if (type == 'number') lok = !isNaN(_v);
                 if (lok)
-                { if (valid) { lok = valid.call(_this, _this.getValue()); }; }
-                else {
-                    _this.validMessage = gmessage.valid_number;
-                }
-            } else { _this.validMessage = gmessage.valid_int }
+                { if (valid)  lok = valid.call(_this, _v);  }
+                else   _this.validMessage = gmessage.valid_number;
+            } else _this.validMessage = gmessage.valid_int;
         }
         if (!lok) {
-            $(_this).css({ borderColor: 'red' });
-            $(_this).gtip({ shadow: true, text: _this.validMessage });
+            $(_this).css('border-color', 'red');
+            $(tiptarget).gtip({ shadow: true, text: _this.validMessage });
         } else {
-            if (_this.removeTip) _this.removeTip();
+            if (tiptarget.removeTip) tiptarget.removeTip();
+            if (ex && ex.value) $(_this).css('border-color','rgba(0,0,0,0)' );
         }
         return lok;
 
@@ -231,21 +281,26 @@ jguiproto.prototype = {
     },
     todate: function (str) {
         if (!str) return undefined;
-        var cd = new Date(Date.parse(str));
-        try {
-            if (isNaN(cd)) {
-                var arys = str.split('-');
-                cd = new Date(arys[0], --arys[1], arys[2]);
-                if (cd.toString().indexOf('Invalid') > -1) {
-                    var arys = str.split(',');
+        if(str instanceof Date) return str;
+        
+        if ((typeof (str)).toLowerCase() == 'string') {
+            if (/^\/Date\(/.test(str)) return new Date(parseInt(/\d+/.exec(str)[0]));
+            var cd = new Date(Date.parse(str));
+            try {
+                if (isNaN(cd)) {
+                    var arys = str.split('-');
                     cd = new Date(arys[0], --arys[1], arys[2]);
                     if (cd.toString().indexOf('Invalid') > -1) {
-                        cd = undefined;
+                        var arys = str.split(',');
+                        cd = new Date(arys[0], --arys[1], arys[2]);
+                        if (cd.toString().indexOf('Invalid') > -1) {
+                            cd = undefined;
+                        }
                     }
                 }
+            } catch (e) {
+                cd = undefined;
             }
-        } catch (e) {
-            cd = undefined;
         }
         return cd;
     },
@@ -673,8 +728,8 @@ Date.prototype.add = function (v, n) {
         function _uploadblob(file, div, action) {
             div.children("span:first").html(file.name);
             var _a = div.children("span").eq(1).children("progress");
-            if (_a.length) _a.val(0); else _a = $("<progress></progress>").attr('max', 100).attr("value", 0).appendTo(div.children("span").eq(1));
-            var _0 = 0, _1 = 2 * 1024 * 1024, _2 = Math.ceil(file.size / _1), _3 = 0, _4 = new Date().getTime();
+            if (_a.length) _a.val(0); else _a = $('<progress class="gpro"></progress>').attr('max', 100).attr("value", 0).appendTo(div.children("span").eq(1));
+            var _0 = 0, _1 = 2 * 1024 * 1024, _2 = Math.ceil(file.size / _1), _3 = 0, _4 = (new Date()).getTime();
             var reader = jgui._newreader();
             reader.onprogress = function (e) { _0 += e.loaded; _a[0].value = Math.round((_0 / file.size) * 100); };
             reader.onload = function (e) {
@@ -686,7 +741,7 @@ Date.prototype.add = function (v, n) {
                     }
                     if (_3 == _2) { div.children("span:last").html('ok'); _a[0].value = 100; }
                 }, false);
-                xhr.open("POST", action + "?f=" +encodeURIComponent(file.name) + "&guid=g_" + _4 + "&c=" + new Date().getTime());
+                xhr.open("POST", action + "?f=" +encodeURIComponent(file.name) + "&guid=g_" + _4 + "&c=" + (new Date()).getTime());
                 xhr.setRequestHeader("gfalg", "1,"+_2+','+_3);
                 xhr.send(e.target.result);
             };
@@ -746,7 +801,13 @@ Date.prototype.add = function (v, n) {
             }, jgui.parseJSON(ofile.data('options')), options);
             ofile.gbutton({icon:op.icon});
             var _0 = jgui.getuid();
-            $('<input type="file" />').attr('name', "$file" + _0).attr('id', "$file" + _0).appendTo(ofile);
+             op.fileobj=$('<input type="file" />').attr('name', "$file" + _0).attr('id', "$file" + _0).appendTo(ofile);
+             ofile.on('mousemove', function (e) {
+                 op.fileobj.offset({ top: e.clientY - 15, left: e.clientX - 20 });
+            });
+            this.getValue = function () {
+                return op.fileobj[0].files[0];
+            };
             if (op.multiple) { 
                 op.files = [];
                 ofile.wrap("<div></div>").wrap("<div></div>");
@@ -778,7 +839,7 @@ Date.prototype.add = function (v, n) {
                             op.files[op.files.length - 1]['divobj'] = _0 = $('<div></div>').addClass('filediv').attr("index", op.files.length - 1).appendTo(op.gdiv);
                             _0.html('<span></span><span></span><span></span><span></span>');
                             _0.children("span:first").html(file.name);
-                            $("<progress></progress>").attr('max', 100).attr("value", 0).appendTo(_0.children("span").eq(1));
+                            $('<progress class="gpro"></progress>').attr('max', 100).attr("value", 0).appendTo(_0.children("span").eq(1));
                             $("<a></a>").html(gmessage.file_del).gbutton({ icon: 'remove', click: _remove, target: { arr: op.files, obj: _0 } }).appendTo(_0.children("span").eq(2));
                         }
                     }
@@ -944,13 +1005,14 @@ Date.prototype.add = function (v, n) {
             }).on('blur', function () {
                 ocombo.css({ boxShadow: '', borderColor: (op._vresult ? '#d2d2d2' : 'red') });
             }).on("change", function () {
-                if (ocombo[0].valid() && ocombo[0].removeTip) ocombo[0].removeTip();
+                if (ocombo[0].valid() && op.textobj.removeTip) op.textobj.removeTip();
             });
             this.get = function (a) {return op[a] };
             this.setIndex = function (i) {
                 if (op.data)
                     if (op.data[i]) _set(i, op, ocombo);
             };
+            this.clear = function () { op.textobj.val(''); ocombo.data('index', -1); };
             this.setValue = function (cid) {
                 if (op.data) {
                     var lok = true;
@@ -1043,7 +1105,7 @@ Date.prototype.add = function (v, n) {
                 }
                 return i;
             };
-            this.valid = function () { op._vresult = jgui._valid(this, op.valid); return op._vresult; };
+            this.valid = function () { op._vresult = jgui._valid(this, op.valid,null,op.textobj); return op._vresult; };
             init(ocombo, op);
             ocombo.data('options', op);
         });
@@ -1157,21 +1219,22 @@ Date.prototype.add = function (v, n) {
         function _click(e, op) {
             if (op.leafNode) {
                 if (this.children('span').find('.gtree-leaf').length) {
-                    settree();
+                    settree(op,e);
                 }
-            } else settree();
-            function settree()
-            {
-                op.tree_id = e.id;
-                op.textobj.val(e.text);
-                op.textobj.trigger('change').trigger('blur'); 
-                op.poupuobj.hide();
-            }
+            } else settree(op,e);
+        }
+        function settree(op,e) {
+            op.tree_id = e.id;
+            op.textobj.val(e.text);
+            op.textobj.trigger('change').trigger('blur');
+            op.poupuobj.hide();
+            if (op.onChange && $.isFunction(op.onChange)) op.onChange.call(this, op.tree_id);
         }
         return this.each(function () {
             var otreeselect = $(this);
             var op = $.extend({
-                leafNode:false
+                leafNode: false,
+                onChange:null
             }, jgui.parseJSON($(this).data('options')), options);
             otreeselect.gcombo($.extend(op,{ _iscombo: false,_type:'treeselect',islockheight: true }));
             op = otreeselect.data('options');
@@ -1183,13 +1246,14 @@ Date.prototype.add = function (v, n) {
             this.setValue = function (cid) {
                 op.treeobj[0].geach(function (e) {
                     if (e.id == cid) {
-                        op.tree_id = e.id;
-                        op.textobj.val(e.text);
-                        op.textobj.trigger('change').trigger('blur'); 
-                        op.poupuobj.hide(); return false;
+                        settree(op, e); return false;
                     }
                     else return true;
                 });
+            };
+            this.clear = function () {
+                op.tree_id = -1;
+                op.textobj.val('');
             };
             this.setUrl = function (url) { 
                     op.tree_id = undefined;
@@ -1287,33 +1351,112 @@ Date.prototype.add = function (v, n) {
             if (bit && bit[0]) o.bit = bit[0];
             return jgui.genenumber(o);
         };
-        function genecell(v, row, ogrid) {
-            var obj = ogrid.data;
-            var vv = obj[row][v.field];
-            if (v.dateFormat) {
+        function genecell(v, row,vv) {
+            var vv = vv!==undefined ? vv : row[v.field];
+            if (v.dateFormat && /^\/Date\(/.test(vv)) {
                 var a = /\d+/.exec(vv);
                 var riqi = new Date(parseInt(a[0]));
                 vv = riqi.format(v.dateFormat);
             } else {
-                if (v.render) vv = v.render.call(this, { record: obj[row], value: vv });
+                if (v.render) vv = v.render.call(this, { record: row, value: vv });
                 if (v.format) vv = getformat(vv, v.format);
             }
-            return '<div>' + vv + '</div>';
+            return vv 
+        };
+         function maskcell(v,j,op)
+        {
+             var row = op.data[j];
+             var _ = $('<div></div>').html(genecell(v, row));
+            if (v.edit)
+            {
+                _.prop('contenteditable', true)
+                    .on('keyup', function (e) {
+                        if (e.keyCode == 9) {
+                            var _0 = $(this).parent().parent().children('td');
+                            if (e.shiftKey)
+                                for (var j = $(this).parent().data('options').col - 1 ; j > -1; j--) {
+                                    if ($(_0[j]).children('div').attr('contenteditable')) {
+                                        set(); break;
+                                    }
+                                }
+                            else
+                                for (var j = $(this).parent().data('options').col + 1, l = _0.length; j < l; j++) {
+                                    if ($(_0[j]).children('div').attr('contenteditable')) {
+                                        set(); break;
+                                    }
+                                }
+                            return false;
+                        }
+                            function set()
+                            {
+                                    $(_0[j]).trigger('click');
+                                    $(this).trigger("blur");
+                                    $(_0[j]).children("div").trigger('focus');
+                                }
+                    })
+                    .on('keydown', function (e) {
+                        switch (e.keyCode)
+                        {
+                            case 13:
+                            case 40:
+                            case 38:
+                                var j = $(this).parent().data('options').col;
+                                var _0=$(this).parent().parent();
+                                var _tr = e.keyCode == 38 ? _0.prev('tr') : _0.next('tr');
+                                if (_tr.length && _tr.children("td").eq(j).children("div").attr('contenteditable')) {
+                                    _tr.trigger('click');
+                                    _tr.children("td").eq(j).trigger('click');
+                                    $(this).trigger("blur");
+                                    _tr.children("td").eq(j).children("div").trigger('focus');
+                                }
+                                return false;
+                                break;
+                            case 9:
+                                return false;
+                                break;
+                        }
+                    })
+                    .on('blur', function () {
+                        var _v = this.innerText || this.textContent, t = $(this);
+                        _v = (v.dataType == 'N' || v.dataType == 'I') ? _v.replace(/,/g, '') : _v;
+                        if (_v != op.data[j][v.field] || t.parent().hasClass('g-_edit')) {
+                            var i = 0;
+                            if (!t.parent().hasClass('g-_edit')) t.parent().addClass("g-_edit");
+                            for (; i < op.editdata.length; i++) {
+                                if (op.editdata[i]._index == j) break;
+                            }
+                            if (i < op.editdata.length)
+                                op.editdata[i][v.field] = _v;
+                            else {
+                                op.editdata.push({ _index: j});
+                                i = op.editdata.length - 1;
+                                op.editdata[i][v.field] = _v;
+                            }
+
+                            if (v.dataType == 'N' || v.dataType == 'I') 
+                                op.editdata[i]['_' + v.field] = jgui._valid(this, null, v.dataType == 'N' ? 'number' : 'int', this, { value: _v });
+                            if (v.editValid && $.isFunction(v.editValid)) 
+                                op.editdata[i]['_' + v.field] = jgui._valid(this, v.editValid, null, this, { value: _v });
+                            this.innerHTML = genecell(v, row, _v);
+                        }
+                    });
+            }
+            return _;
         }
+
         function settitle(ogrid, osum, op, obody) {
             var tr = ogrid.children('thead').children('tr'); 
             var trs = tr.length;
             var otd = tr.eq(trs - 1).children('td').get();
-            for (var k = trs - 2; k > -1; k--) 
-            {
+            for (var k = trs - 2; k > -1; k--) {
                 tr.eq(k).children('td').each(function (i, v) {
                     if (parseInt($(v).attr('rowspan')) == trs - k) {
                         otd.push(v)
                     }
                 });
-            }
-            var ftr1 = $('<tr></tr>').height(0).prependTo(ogrid.children('thead')); //第一行用于控制宽度
-            var ftr2 = $('<tr></tr>').height(0).prependTo(obody.children('tbody')); //第一行用于控制宽度
+            };
+            var ftr1 = $('<tr></tr>').height(0).prependTo(ogrid.children('thead')); 
+            var ftr2 = $('<tr></tr>').height(0).prependTo(obody.children('tbody')); 
             if (op.sumobj) {
                 var ftr3 = $('<tr></tr>').height(0).prependTo(osum.children('tbody'));
                 var ftr4 = $('<tr></tr>').appendTo(osum.children('tbody'));
@@ -1442,33 +1585,36 @@ Date.prototype.add = function (v, n) {
                 });
         };
         function setbody(ogrid, obody, op, obj) {
-            ogrid.data = ogrid.op.data = obj = jgui.parseJSON(obj);
+            ogrid.op.data = obj = jgui.parseJSON(obj);
+            ogrid.op.editdata = [];
             obody.children('tbody').children('tr:gt(0)').remove();
             for (var j = 0, l = obj.length; j < l; j++) {
                 var tr = $('<tr></tr>').data('index', j);
                 ogrid.op.otd.forEach(function (v, i) {
-                    var divstr = '<td></td>';
-                    if (v && v.type == "indexCol") {
-                        divstr = '<td style="text-align:center">' + (1 + j + (op.pageIndex - 1) * op.pageSize) + '</td>';
-                    }
+                    var _td = $('<td></td>').data('options', { row: j, col: i }).appendTo(tr);
+                    if (v && v.type == "indexCol") _td.html(1 + j + (op.pageIndex - 1) * op.pageSize).css('text-align', 'center');
+                    else if (v && v.field && obj[j][v.field] !== undefined) 
+                        _td.css("text-align", (v.align && 'right,left,center'.indexOf(v.align) > -1) ? v.align : '').append(maskcell(v, j,ogrid.op));
+                    else if (v.render)
+                        _td.html(v.render.call(this, { record: obj[j], value: undefined }));
                     else
-                        if (v && v.field && obj[j][v.field] != undefined) {
-                            divstr = '<td style="' + ((v.align && 'right,left,center'.indexOf(v.align) > -1) ? "text-align:" + v.align : "") + '">' + genecell(v, j, ogrid) + '</td>';
-                        }
-                    var _0 = $(divstr).data('options', { row: j, col: i }).appendTo(tr);
-                    if (v.jQrender) { v.jQrender.call(this, { jq: _0, record: op.data[j],index:j }); }  
+                        if (v.jQrender) v.jQrender.call(this, { jq: _td, record: obj[j], index: j });
+                    if (op.onCellDraw && $.isFunction(op.onCellDraw)) { op.onCellDraw.call(_td, ((v && v.field) ? obj[j][v.field] : undefined), v.field, obj[j]) }
                 });
-                if (op.onRowDraw) op.onRowDraw.call(tr, obj[j]);
+                if (op.onRowDraw&& $.isFunction(op.onRowDraw)) op.onRowDraw.call(tr, obj[j]);
                 obody.append(tr);
             }
-            if (op.onload &&$.isFunction(op.onload)) op.onload.call(this, op);
+            if (op.onload && $.isFunction(op.onload)) op.onload.call(this,ogrid[0]);
         };
         function setxy(obody, op) {
             obody.css({ overflow: 'hidden', display: 'none' });
-            if (op.fit)  
+            if (op.fit)
                 jgui.seth(obody.parent().parent());
-            else  
-                obody.parent().parent().css({ width: op.width, height: op.height });
+            else
+            {
+                if (op.width < 0) jgui.setw(obody.parent().parent()); else obody.parent().parent().width(op.width);
+                if (op.height < 0) jgui.seth(obody.parent().parent()); else obody.parent().parent().height(op.height);
+            }
             jgui.seth(obody.parent()); 
             obody.css({ display: 'table' });
         }
@@ -1556,20 +1702,6 @@ Date.prototype.add = function (v, n) {
                            obody.selectcell = $(this);
                            var a = obody.selectcell.children('div');
                            a.css({ backgroundColor: '#EAF2FF' });
-                           var c = ogrid.op.otd[b.col].edit;
-                           if (c) {
-                               if (c == 'text') {
-                                   var d = $('<input type="text" style="width:100%;border:0;"></input>').val(ogrid.data[b.row][ogrid.op.otd[b.col].field]);
-                                   d.blur(function (e) {
-                                       refreshcell(obody);
-                                       var v = $(this).val();
-                                       ogrid.data[b.row][ogrid.op.otd[b.col].field] = v;
-                                       a.parent().empty().append(genecell(ogrid.op.otd[b.col], b.row, ogrid));
-                                   }).on('keypress', function (e) { if (e.which == 13) $(this).triggerHandler('blur'); else if (e.which == 27) { a.parent().empty().append(genecell(ogrid.op.otd[b.col], b.row, ogrid)); refreshcell(obody); } });
-                                   a.empty().append(d);
-                                   d.select().focus();
-                               }
-                           }
                        }
                    });
         };
@@ -1590,6 +1722,7 @@ Date.prototype.add = function (v, n) {
                 dataList: [{ id: 20, text: '20' }, { id: 30, text: '30' }, { id: 40, text: '40' }, { id: 80, text: '80' }, { id: 120, text: '120' }],
                 pageSize: 20,
                 pageIndex: 1,
+                dataKey:'id',
                 sortField: 'id',
                 onload: null,
                 sortOrder: 'asc',
@@ -1623,14 +1756,38 @@ Date.prototype.add = function (v, n) {
                 else
                 return op[name]
             };
-            this.getSelect = function () { if (obody.selectrow) return ogrid.data[obody.selectrow.data('index')]; };
+            this.getSelect = function () { if (obody.selectrow) return ogrid.op.data[obody.selectrow.data('index')]; };
             this.selectRow = function (i) {
-                var l = ogrid.data.length;
+                var l = ogrid.op.data.length;
                 if (i < 1 || i > l - 1) return;
                 var tr = obody.children('tbody').children('tr:eq(' + i + ')');
                 if (tr.length) tr.trigger('click');
             };
-            this.getData = function () { return ogrid.data; };
+            this.getData = function () { return ogrid.op.data; };
+            this.getEditData = function () {
+                return $.grep($.map(ogrid.op.editdata, function (v, i) {
+                    var _ = {}, j = v._index, s = ogrid.op.data[j];
+                    _[op.dataKey] = s[op.dataKey];
+                    for (var a in v) {
+                        if (a.indexOf('_') < 0 && s[a] != v[a]) _[a] = v[a];
+                    }
+                    return _;
+                }), function (v, i) {
+                    return jgui.getobjlength(v) > 1;
+                });
+            };
+            this.valid = function () {
+                var _0 = true;
+                for (var i = 0; i < ogrid.op.editdata.length; i++)
+                {
+                    var _1 = true, v = ogrid.op.editdata[i];
+                    for (var a in v) {
+                        if (a.indexOf('_') > -1 && a != '_index' && !v[a]) { _1 = false; break; }
+                    }
+                    if (!_1) { _0 = false; break;}
+                }
+                return _0;
+            };
             this.setData = function (obj) {
                 if (obj) {
                     op.recordTotal = obj.length;
@@ -1642,17 +1799,17 @@ Date.prototype.add = function (v, n) {
                 if (!i && !j)
                     if (op.cellSelect && obody.selectcell) {
                         var a = obody.selectcell.data('options');
-                        return ogrid.data[a.row][ogrid.op.otd[a.col].field];
+                        return ogrid.op.data[a.row][ogrid.op.otd[a.col].field];
                     }
                     else if (!isNaN(i) && !isNaN(j)) {
-                        var l = ogrid.data.length, k = ogrid.op.otd.length;
+                        var l = ogrid.op.data.length, k = ogrid.op.otd.length;
                         if (i < 1 || i > l - 1 || j < 0 || j > k - 1) return;
-                        return ogrid.data[i - 1][ogrid.op.otd[j - 1].field];
+                        return ogrid.op.data[i - 1][ogrid.op.otd[j - 1].field];
                     }
             };
             this.setCell = function (i, j) {
                 if (op.cellSelect) {
-                    var l = ogrid.data.length, k = ogrid.op.otd.length;
+                    var l = op.data.length, k = ogrid.op.otd.length;
                     if (i < 1 || i > l - 1 || j < 0 || j > k - 1) return false;
                     obody.children('tbody').children('tr:eq(' + i + ')').children('td:eq(' + (j - 1) + ')').trigger('click');
                 }
@@ -2242,11 +2399,11 @@ Date.prototype.add = function (v, n) {
             $('*[name]', oform).each(function (i, o) {
                 var name = $(o).attr('name');
                 var v = _genevalue(name, o);
-                if (!(v === undefined) && (fa || v != op[name])) r[name] = v;
+                if (!(v === undefined) && (fa || v != op[name] || $(o).attr('type') == 'hidden')) r[name] = v;
             });
             return r;
          };
-          function _genevalue(name, obj) {
+        function _genevalue(name, obj) {
              var v = undefined;
              if (name && !/^[\$]\.*/.test(name)) { 
                  if (obj.getValue) {
@@ -2255,7 +2412,7 @@ Date.prototype.add = function (v, n) {
                  }
                  else {
                      if (typeof (obj.value) == 'string') 
-                         obj[name] = obj.value;
+                         v = obj.value;
                  }
              }
              return v;
@@ -2265,15 +2422,21 @@ Date.prototype.add = function (v, n) {
             this.setData = function (o) {
                 if (typeof (o) != 'object') return;
                 this.saveData();
-                $.extend(op, o);
-                for (var a in o) {
-                    var b = jgui.getname(a, oform);
+                for (var _ in o) {
+                    if (o[_] === null || o[_] === undefined) op[_] = '';
+                    else
+                        if (o[_] instanceof Date) op[_] = o[_].tostr();
+                        else
+                            if (/^\/Date\(/.test(o[_]) && typeof (o[_]) == 'string') op[_] = jgui.todate(o[_]).tostr();
+                            else op[_] = o[_];
+
+                    var b = jgui.getname(_, oform);
                     if (b) {
                         if (b.setValue)  
-                            b.setValue(o[a]);
+                            b.setValue(op[_]);
                         else {
                             if (typeof (b.value) == 'string') 
-                                b.value = o[a];
+                                b.value = op[_];
                             if (b.tagName.toLowerCase() == 'input')
                                 $(b).trigger("change").trigger("blur");
                         }
@@ -2329,11 +2492,10 @@ Date.prototype.add = function (v, n) {
                 owindow[0].drag();
             }
             owindow[0].seth(op.fit);
-            if (!op.closed) owindow[0].open(); else owindow.hide();
+            if (!op.closed) owindow[0].open(op.fit); else owindow.hide();
         }
         return this.each(function () {
             var owindow = $(this);
-
             var op = $.extend({
                 header: '',
                 headerIcon: '',
@@ -2365,6 +2527,11 @@ Date.prototype.add = function (v, n) {
                 if (fit) {  
                     owindow.css({ top: 0, left: 0 }).outerHeight($(window).height(), true).outerWidth($(window).width(), true);
                     jgui.seth(op.gcontent);
+                    var _0 = op.gcontent.children('iframe');
+                    if (_0.length) {
+                        _0.outerHeight(op.gcontent.height(), true);
+                    }
+                    
                     owindow.css('width', '');
                 }
                 else {
@@ -2385,11 +2552,11 @@ Date.prototype.add = function (v, n) {
             this.drag = function () {
                 op.gheader.find('td').eq(0).gdraggle({ title: function () { return owindow; }, xy: 'xy' });
             };
-            this.open = function () {
+            this.open = function (fit) {
                 if (op.maskobj) op.maskobj.show();
                 if (op.maxobj) {
                     op.maxobj.removeClass('g-restore').addClass('g-max');
-                    this.seth(false);
+                    this.seth(fit);
                 }
                 owindow.show();
             };
@@ -2533,7 +2700,7 @@ Date.prototype.add = function (v, n) {
             jq.off('mouseover').on('mouseover', function (e) {
                 jq[0].showTip();
             })
-            .off('mouseout').on('mouseout', function (e) { jq.data('over', false); otip.hide(); });
+            .off('mouseleave').on('mouseleave', function (e) { jq.data('over', false); otip.hide(); });
 
         });
     };

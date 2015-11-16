@@ -58,6 +58,9 @@
 .g-find2{background:url(icons/1/find.png) no-repeat;}
 .g-find2:hover{background:url(icons/2/find.gif) no-repeat;}
 
+.g-find{background:url(icons/1/find.png) no-repeat;}
+.g-find:hover{background:url(icons/2/find.gif) no-repeat;}
+
 .g-set{background:url(icons/1/set.gif) no-repeat;}
 .g-set:hover{background:url(icons/2/set.gif) no-repeat;}
 
@@ -104,6 +107,7 @@
 .g-undo:hover{background:url(icons/2/undo.gif) no-repeat;}
 
 .g-folder{background:url(icons/1/folder.gif) no-repeat;}
+.g-_edit{background:url(icons/1/_edit.gif) no-repeat top left;}
 .g-cal{	background:url(icons/1/cal.gif) no-repeat;}
 .g-desc{background:url(icons/1/desc.gif) no-repeat;}
 .g-asc{	background:url(icons/1/asc.gif) no-repeat;}
@@ -111,6 +115,8 @@
 .g-unlock{background:url(icons/1/unlock.gif) no-repeat;}
 .g-zoomin{background:url(icons/1/zoomin.gif) no-repeat;}
 .g-zoomout{background:url(icons/1/zoomout.gif) no-repeat;}
+.g-cry{background:url(icons/1/cry.gif) no-repeat;}
+.g-laugh{background:url(icons/1/laugh.gif) no-repeat;}
 
 .g-help{background:url(icons/1/help.gif) no-repeat;}
 .g-home{background:url(icons/1/home.gif) no-repeat;}

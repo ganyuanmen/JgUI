@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/jgui-1.0.js"></script>
+    <link href="../css/jgui.css" rel="stylesheet" />
+    <link href="../css/icon.css" rel="stylesheet" />
+    <script src="../js/demo.js"></script>
+
+</head>
+
+<body style=" margin:10px;">
+    <fieldset>
+        <legend>treeselect基本功能</legend>
+        
+        <div class="gtoolbar">
+            <a class="gbutton" data-options="{click:getvalue,icon:'add'}">getValue</a>
+            <a class="gbutton" data-options="{click:gettext,icon:'edit'}">getText</a>
+            <a class="gbutton" data-options="{click:setValue,icon:'edit'}">setValue</a>
+        </div>
+        <br />
+        <ul id="mytreeselect" data-options="{url:'../data/tree.txt',checkboxNode:true,width:120}" class="gtreeselect"></ul>
+        <br />
+        <br />
+        <div>result:</div>
+        <textarea cols="80"></textarea>
+    </fieldset>
+    <br />
+    <fieldset>
+        <legend>treeselect 自定义验证</legend>
+
+        <div class="gtoolbar">
+            <a class="gbutton" data-options="{click:check1,icon:'add'}">验证</a>
+
+        </div>
+        <br />
+        <ul id="mytreeselect2" data-options="{url:'../data/tree.txt',valid:mycheck1}" class="gtreeselect"></ul>
+        <br />
+        <br />
+        <div>result:</div>
+        <textarea cols="80"></textarea>
+    </fieldset>
+
+    <br />
+    <fieldset>
+        <legend>treeselect 只允许leafNode 被选择</legend>
+
+        <div class="gtoolbar">
+            <a class="gbutton" data-options="{click:getvalue1,icon:'add'}">getValue</a>
+            <a class="gbutton" data-options="{click:gettext1,icon:'edit'}">getText</a>
+
+        </div>
+        <br />
+        <ul id="mytreeselect1" data-options="{url:'../data/tree.txt',leafNode:true}" class="gtreeselect"></ul>
+        <br />
+        <br />
+        <div>result:</div>
+        <textarea cols="80"></textarea>
+    </fieldset>
+
+
+</body>
+
+</html>
+
+<script>
+    var ihtml = document.body.innerHTML;
+    var riqi = jgui.get('mydate');
+    function getvalue() {
+        $('textarea:first').val('getValue:' + mytreeselect.getValue());
+    }
+    function gettext() {
+        $('textarea:first').val('getText:' + mytreeselect.getText());
+    }
+    function getvalue1() {
+        $('textarea:last').val('getValue:' + mytreeselect1.getValue());
+    }
+    function gettext1() {
+        $('textarea:last').val('getText:' + mytreeselect1.getText());
+    }
+    function mycheck1(v) {
+        if (parseInt(v)>10) {
+            this.validMessage = '选择的ID不能大于10';
+            return false;
+        } else
+            return true;
+    }
+    function check1() {
+        $('textarea').eq(1).val(mytreeselect2.getText() + ":" + (mytreeselect2.valid() ? "验证通过！" : '验证失败！'));
+    }
+    function setValue()
+    {
+        mytreeselect.setValue('6');
+    }
+</script>
